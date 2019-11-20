@@ -1,3 +1,5 @@
+import { IAlbum } from "store/types";
+
 export enum AlbumsActionType {
   RECEIVE_ALBUMS = "albums/receive_albums",
 }
@@ -7,10 +9,10 @@ export interface IAlbumsAction {
 }
 
 export interface IReceiveAlbumsAction extends IAlbumsAction {
-  payload: { albums: any };
+  payload: { albums: IAlbum[] };
   type: AlbumsActionType.RECEIVE_ALBUMS;
 }
 
 export interface IAlbumsState {
-  list: [];
+  list: IAlbum[];
 }

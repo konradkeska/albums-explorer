@@ -1,13 +1,10 @@
+import initialState from "./initial";
 import {
   AlbumsActionType,
   IAlbumsAction,
   IAlbumsState,
   IReceiveAlbumsAction,
 } from "./types";
-
-const initialState: IAlbumsState = {
-  list: [],
-};
 
 const albums = (state = initialState, action: IAlbumsAction): IAlbumsState => {
   const receiveAlbums = (): IAlbumsState => ({
