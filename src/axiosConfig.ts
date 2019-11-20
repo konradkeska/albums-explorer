@@ -1,31 +1,27 @@
 import axios from "axios";
 
-import { onError } from "./toasts";
+import { onError } from "./utils/toasts";
 
 const apiInstance = axios.create({
-  baseURL: "/",
+  baseURL: "https://jsonplaceholder.typicode.com",
   headers: { "Content-Type": "application/json; charset=UTF-8" },
 });
 
 apiInstance.interceptors.request.use(
-  (config) => {
-    // Do something before request is sent
-    return config;
-  },
+  // Do something before request is sent
+  (config) => config,
+  // Do something with request error
   (error) => {
-    // Do something with request error
     onError();
     return Promise.reject(error);
   },
 );
 
 apiInstance.interceptors.response.use(
-  (response) => {
-    // Do something with response data
-    return response;
-  },
+  // Do something with response data
+  (response) => response,
+  // Do something with response error
   (error) => {
-    // Do something with response error
     onError();
     return Promise.reject(error);
   },
