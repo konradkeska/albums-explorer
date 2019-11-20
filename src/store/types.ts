@@ -1,9 +1,12 @@
 import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
+
+import { IAlbumDetailsState } from "./albumDetails/types";
 import { IAlbumsState } from "./albums/types";
 
 export interface IRootState {
   albums: IAlbumsState;
+  albumDetails: IAlbumDetailsState;
 }
 
 export type ApiAction<T extends Action<any>> = ThunkAction<
