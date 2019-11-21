@@ -2,6 +2,8 @@ import React from "react";
 
 import { ToastContainer } from "react-toastify";
 
+import eng from "lang/eng";
+
 import "./AppLayout.scss";
 
 const AppLayout: React.FC = ({ children }) => {
@@ -13,7 +15,7 @@ const AppLayout: React.FC = ({ children }) => {
             className="search-form__input"
             type="search"
             name="_q"
-            placeholder="Enter album name"
+            placeholder={eng.ENTER_ALBUM_NAME}
             autoFocus={true}
           />
         </form>

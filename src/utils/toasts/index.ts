@@ -1,4 +1,7 @@
 import { PositionOptions, toast } from "react-toastify";
+
+import eng from "lang/eng";
+
 import "./toasts.scss";
 
 const getToast = (
@@ -13,15 +16,15 @@ const getToast = (
   progressClassName: `toast--${type}__progress-bar`,
 });
 
-const onError = (message = "An error occured.. 😟", autoClose = 3500) => {
+const onError = (message = `${eng.ERROR_OCCURED}.. 😟`, autoClose = 3500) => {
   toast(message, getToast("danger", autoClose));
 };
 
-const onSuccess = (message = "Success! 👌", autoClose = 3500) => {
+const onSuccess = (message = `${eng.SUCCESS}! 👌`, autoClose = 3500) => {
   toast(message, getToast("success", autoClose));
 };
 
-const onInform = (message = "Some message. 💁", autoClose = 3500) => {
+const onInform = (message = `${eng.SOME_MESSAGE}. 💁`, autoClose = 3500) => {
   toast(message, getToast("secondary", autoClose));
 };
 

@@ -10,6 +10,8 @@ import Filters, { IFilter } from "shared/Filters";
 import ListTile from "shared/ListTile";
 import Pagination from "shared/Pagination";
 
+import eng from "lang/eng";
+
 import { setQueryParam } from "utils/helpers";
 
 interface IActionsProps {
@@ -36,7 +38,7 @@ const Albums: React.FC<Props> = ({ albums, users, loadAlbums, loadUsers }) => {
 
   const FILTER_ITEMS = [
     {
-      label: "results",
+      label: eng.RESULTS,
       onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {
         setQueryParam("_limit", e.currentTarget.value, history);
       },

@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import { useHistory, useParams } from "react-router";
 import {
   loadAlbum,
+  loadAlbumPhotos,
   loadAlbumUser,
   loadAlbumUserPosts,
-  loadAlbumPhotos,
 } from "store/albumDetails/api";
+
+import eng from "lang/eng";
 
 const AlbumDetails: React.FC = () => {
   const history = useHistory();
@@ -26,7 +28,7 @@ const AlbumDetails: React.FC = () => {
         onClick={onClick}
         className="page-nav__button page-nav__button--active"
       >
-        go back
+        {eng.GO_BACK}
       </button>
     </nav>
   );
