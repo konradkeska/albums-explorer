@@ -13,7 +13,7 @@ const StyledDiv = styled.div`
 
 const Spinner: React.FC = () => (
   <StyledDiv>
-    <Loader type="TailSpin" color="#2783f4" height={50} width={50} />
+    <Loader type="TailSpin" color="gray" height={50} width={50} />
   </StyledDiv>
 );
 
