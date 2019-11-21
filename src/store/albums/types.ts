@@ -1,4 +1,4 @@
-import { IAlbum, IPagination, IUser } from "store/types";
+import { IAlbum, IUser } from "store/types";
 
 export enum AlbumsActionType {
   RECEIVE_ALBUMS = "albums/receive_albums",
@@ -22,5 +22,4 @@ export interface IReceiveUsersAction extends IAlbumsAction {
 export interface IAlbumsState {
   list: IAlbum[];
   users: IUser[];
-  pagination: Partial<IPagination>;
 }

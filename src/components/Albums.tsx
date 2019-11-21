@@ -1,44 +1,38 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 
 import * as selectors from "store/albums/selectors";
 import * as services from "store/albums/services";
-import { IAlbum, IPagination, IRootState, IUser } from "store/types";
+import { IAlbum, IRootState, IUser } from "store/types";
 
 import Filters, { IFilter } from "shared/Filters";
 import ListTile from "shared/ListTile";
 import Pagination from "shared/Pagination";
-import { useHistory } from "react-router";
+
 import { setQueryParam } from "utils/helpers";
 
 interface IActionsProps {
-  loadAlbums: (pagination: Partial<IPagination>) => void;
+  loadAlbums: () => void;
   loadUsers: () => void;
 }
 
 interface IConnectedProps {
   albums: IAlbum[];
   users: IUser[];
-  pagination: Partial<IPagination>;
 }
 
 type Props = IActionsProps & IConnectedProps;
 
-const Albums: React.FC<Props> = ({
-  albums,
-  users,
-  pagination,
-  loadAlbums,
-  loadUsers,
-}) => {
+const Albums: React.FC<Props> = ({ albums, users, loadAlbums, loadUsers }) => {
   const history = useHistory();
   const currentUrlParams = new URLSearchParams(window.location.search);
   const currentUrlParamsString = currentUrlParams.toString();
 
   useEffect(() => {
-    loadAlbums(pagination);
+    loadAlbums();
     loadUsers();
-  }, [loadAlbums, loadUsers, pagination, currentUrlParamsString]);
+  }, [loadAlbums, loadUsers, currentUrlParamsString]);
 
   const FILTER_ITEMS = [
     {
@@ -87,7 +81,6 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state: IRootState): IConnectedProps => ({
   albums: selectors.getAlbums(state),
-  pagination: selectors.getPagination(state),
   users: selectors.getUsers(state),
 });
 

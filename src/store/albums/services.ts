@@ -1,13 +1,11 @@
 import * as actions from "./actions";
 import * as api from "./api";
 
-import { ApiAction, IPagination } from "store/types";
+import { ApiAction } from "store/types";
 import { IReceiveAlbumsAction, IReceiveUsersAction } from "./types";
 
-const loadAlbums = (
-  pagination: Partial<IPagination>,
-): ApiAction<IReceiveAlbumsAction> => async (dispatch) => {
-  const { data } = await api.loadAlbums(pagination);
+const loadAlbums = (): ApiAction<IReceiveAlbumsAction> => async (dispatch) => {
+  const { data } = await api.loadAlbums();
   dispatch(actions.receiveAlbums(data));
 };
 
