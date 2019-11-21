@@ -1,5 +1,6 @@
 import { lazy } from "react";
 
-const App = lazy(() => import("./components/App"));
+const Albums = lazy(() => import("./components/Albums"));
+const AlbumDetails = lazy(() => import("./components/AlbumDetails"));
 
-export { App };
+export { Albums, AlbumDetails };

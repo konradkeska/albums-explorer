@@ -1,12 +1,19 @@
 import * as actions from "./actions";
 import * as api from "./api";
 
-import { ApiAction } from "store/types";
-import { IReceiveAlbumsAction } from "./types";
+import { ApiAction, IPagination } from "store/types";
+import { IReceiveAlbumsAction, IReceiveUsersAction } from "./types";
 
-const loadAlbums = (): ApiAction<IReceiveAlbumsAction> => async (dispatch) => {
-  const { data } = await api.loadAlbums();
+const loadAlbums = (
+  pagination: Partial<IPagination>,
+): ApiAction<IReceiveAlbumsAction> => async (dispatch) => {
+  const { data } = await api.loadAlbums(pagination);
   dispatch(actions.receiveAlbums(data));
 };
 
-export { loadAlbums };
+const loadUsers = (): ApiAction<IReceiveUsersAction> => async (dispatch) => {
+  const { data } = await api.loadUsers();
+  dispatch(actions.receiveUsers(data));
+};
+
+export { loadAlbums, loadUsers };

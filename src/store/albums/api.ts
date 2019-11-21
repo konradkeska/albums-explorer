@@ -1,7 +1,14 @@
 import apiInstance from "axiosConfig";
 
-import { IAlbum } from "store/types";
+import { IAlbum, IPagination, IUser } from "store/types";
 
-const loadAlbums = async () => apiInstance.get<IAlbum[]>(`/albums`);
+const loadAlbums = async (pagination: Partial<IPagination>) => {
+  const currentUrlParams = new URLSearchParams(window.location.search);
+  return apiInstance.get<IAlbum[]>(
+    `${window.location.pathname}?${currentUrlParams.toString()}`,
+  );
+};
 
-export { loadAlbums };
+const loadUsers = async () => apiInstance.get<IUser[]>(`/users`);
+
+export { loadAlbums, loadUsers };

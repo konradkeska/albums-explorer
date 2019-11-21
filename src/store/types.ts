@@ -19,7 +19,8 @@ export type ApiAction<T extends Action<any>> = ThunkAction<
 export interface IPagination {
   page: number;
   limit: number;
-  query: string;
+  order: "asc" | "desc";
+  q: string;
 }
 
 export interface IAlbum {
