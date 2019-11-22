@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 import * as selectors from "store/albums/selectors";
 import * as services from "store/albums/services";
 import { IAlbum, IRootState, IUser } from "store/types";
 
+import { setQueryParam } from "utils/helpers";
+
 import Filters, { IFilter } from "shared/Filters";
-import ListTile from "shared/ListTile";
+import Tile from "shared/Tile";
 import Pagination from "shared/Pagination";
+import Spinner from "shared/Spinner";
 
 import eng from "lang/eng";
 
-import { setQueryParam } from "utils/helpers";
-
 interface IActionsProps {
   loadAlbums: () => void;
-  loadUsers: () => void;
 }
 
 interface IConnectedProps {
@@ -26,31 +26,31 @@ interface IConnectedProps {
 
 type Props = IActionsProps & IConnectedProps;
 
-const Albums: React.FC<Props> = ({ albums, users, loadAlbums, loadUsers }) => {
+const ALBUMS_PRELOAD_TIMEOUT = 1000;
+
+const Albums: React.FC<Props> = ({ albums, users, loadAlbums }) => {
+  const location = useLocation();
   const history = useHistory();
-  const currentUrlParams = new URLSearchParams(window.location.search);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const currentUrlParams = new URLSearchParams(location.search);
   const currentUrlParamsString = currentUrlParams.toString();
 
   useEffect(() => {
     loadAlbums();
-    loadUsers();
-  }, [loadAlbums, loadUsers, currentUrlParamsString]);
+    setTimeout(() => setLoading(false), ALBUMS_PRELOAD_TIMEOUT);
+  }, [loadAlbums, currentUrlParamsString]);
 
   const FILTER_ITEMS = [
     {
+      defaultValue: Number(currentUrlParams.get("_limit")) || 100,
       label: eng.RESULTS,
       onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setLoading(true);
         setQueryParam("_limit", e.currentTarget.value, history);
       },
       options: [5, 10, 20, 50, 100],
     } as IFilter<number>,
-    {
-      label: "order",
-      onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setQueryParam("_order", e.currentTarget.value, history);
-      },
-      options: ["asc", "desc"],
-    } as IFilter<"asc" | "desc">,
   ];
 
   const getAlbumUser = (userId: number) =>
@@ -59,7 +59,7 @@ const Albums: React.FC<Props> = ({ albums, users, loadAlbums, loadUsers }) => {
       .map((item) => `${item.name} ${item.username}`)[0] || "-";
 
   const Results = albums.map((album, index) => (
-    <ListTile
+    <Tile
       key={album.id}
       album={album}
       index={index}
@@ -67,7 +67,9 @@ const Albums: React.FC<Props> = ({ albums, users, loadAlbums, loadUsers }) => {
     />
   ));
 
-  return (
+  return loading ? (
+    <Spinner />
+  ) : (
     <>
       <Filters items={FILTER_ITEMS} />
       <section className="results">{Results}</section>
@@ -78,7 +80,6 @@ const Albums: React.FC<Props> = ({ albums, users, loadAlbums, loadUsers }) => {
 
 const mapDispatchToProps = {
   loadAlbums: services.loadAlbums,
-  loadUsers: services.loadUsers,
 };
 
 const mapStateToProps = (state: IRootState): IConnectedProps => ({
