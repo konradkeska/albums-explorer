@@ -6,12 +6,12 @@ import * as selectors from "store/albums/selectors";
 import * as services from "store/albums/services";
 import { IAlbum, IRootState, IUser } from "store/types";
 
-import { setQueryParam } from "utils/helpers";
-
 import Filters, { IFilter } from "components/Filters";
 import Pagination from "components/Pagination";
 import Spinner from "components/Spinner";
 import Tile from "components/Tile";
+
+import { setQueryParam } from "utils/helpers";
 
 import eng from "lang/eng";
 
@@ -58,13 +58,8 @@ const Albums: React.FC<Props> = ({ albums, users, loadAlbums }) => {
       .filter((item) => item.id === userId)!!
       .map((item) => `${item.name} ${item.username}`)[0] || "-";
 
-  const Results = albums.map((album, index) => (
-    <Tile
-      key={album.id}
-      album={album}
-      index={index}
-      user={getAlbumUser(album.userId)}
-    />
+  const Results = albums.map((album) => (
+    <Tile key={album.id} album={album} user={getAlbumUser(album.userId)} />
   ));
 
   return loading ? (
