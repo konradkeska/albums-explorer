@@ -4,14 +4,15 @@ import * as api from "./api";
 import { ApiAction } from "store/types";
 import { IReceiveAlbumsAction, IReceiveUsersAction } from "./types";
 
-const loadAlbums = (): ApiAction<IReceiveAlbumsAction> => async (dispatch) => {
-  const { data } = await api.loadAlbums();
-  dispatch(actions.receiveAlbums(data));
+type AlbumsAction = IReceiveAlbumsAction | IReceiveUsersAction;
+
+const loadAlbums = (): ApiAction<AlbumsAction> => async (dispatch) => {
+  const [{ data: albumsData }, { data: usersData }] = await Promise.all([
+    api.loadAlbums(),
+    api.loadUsers(),
+  ]);
+  dispatch(actions.receiveAlbums(albumsData));
+  dispatch(actions.receiveUsers(usersData));
 };
 
-const loadUsers = (): ApiAction<IReceiveUsersAction> => async (dispatch) => {
-  const { data } = await api.loadUsers();
-  dispatch(actions.receiveUsers(data));
-};
-
-export { loadAlbums, loadUsers };
+export { loadAlbums };

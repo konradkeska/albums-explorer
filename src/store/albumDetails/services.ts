@@ -9,32 +9,28 @@ import {
   IReceiveUserPostsAction,
 } from "./types";
 
-const loadAlbum = (id: number): ApiAction<IReceiveAlbumAction> => async (
+type DetailsAction =
+  | IReceiveAlbumAction
+  | IReceivePhotosAction
+  | IReceiveUserAction
+  | IReceiveUserPostsAction;
+
+const loadDetails = (albumId: number): ApiAction<DetailsAction> => async (
   dispatch,
 ) => {
-  const { data } = await api.loadAlbum(id);
-  dispatch(actions.receiveAlbum(data));
+  const [{ data: albumData }, { data: photosData }] = await Promise.all([
+    api.loadAlbum(albumId),
+    api.loadPhotos(albumId),
+  ]);
+  dispatch(actions.receiveAlbum(albumData));
+  dispatch(actions.receivePhotos(photosData));
+
+  const [{ data: userData }, { data: userPostsData }] = await Promise.all([
+    api.loadUser(albumData.userId),
+    api.loadUserPosts(albumData.userId),
+  ]);
+  dispatch(actions.receiveUser(userData));
+  dispatch(actions.receiveUserPosts(userPostsData));
 };
 
-const loadPhotos = (id: number): ApiAction<IReceivePhotosAction> => async (
-  dispatch,
-) => {
-  const { data } = await api.loadAlbumPhotos(id);
-  dispatch(actions.receivePhotos(data));
-};
-
-const loadUser = (id: number): ApiAction<IReceiveUserAction> => async (
-  dispatch,
-) => {
-  const { data } = await api.loadAlbumUser(id);
-  dispatch(actions.receiveUser(data));
-};
-
-const loadUserPosts = (
-  id: number,
-): ApiAction<IReceiveUserPostsAction> => async (dispatch) => {
-  const { data } = await api.loadAlbumUserPosts(id);
-  dispatch(actions.receiveUserPosts(data));
-};
-
-export { loadAlbum, loadPhotos, loadUser, loadUserPosts };
+export { loadDetails };

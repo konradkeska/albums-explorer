@@ -2,16 +2,16 @@ import apiInstance from "axiosConfig";
 
 import { IAlbum, IPhoto, IPost, IUser } from "store/types";
 
-const loadAlbum = async (id: number) =>
-  apiInstance.get<IAlbum>(`/albums/${id}`);
+const loadAlbum = async (albumId: number) =>
+  apiInstance.get<IAlbum>(`/albums/${albumId}?_limit=10&_page=1`);
 
-const loadAlbumPhotos = async (id: number) =>
-  apiInstance.get<IPhoto[]>(`/photos?albumId=${id}&_page=1&_limit=5`);
+const loadPhotos = async (albumId: number) =>
+  apiInstance.get<IPhoto[]>(`/photos?albumId=${albumId}&_page=1&_limit=12`);
 
-const loadAlbumUser = async (id: number) =>
-  apiInstance.get<IUser>(`/users/${id}`);
+const loadUser = async (userId: number) =>
+  apiInstance.get<IUser>(`/users/${userId}`);
 
-const loadAlbumUserPosts = async (id: number) =>
-  apiInstance.get<IPost[]>(`/users/${id}/posts`);
+const loadUserPosts = async (userId: number) =>
+  apiInstance.get<IPost[]>(`/posts?userId=${userId}&_limit=2`);
 
-export { loadAlbum, loadAlbumPhotos, loadAlbumUser, loadAlbumUserPosts };
+export { loadAlbum, loadPhotos, loadUser, loadUserPosts };
