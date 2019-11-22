@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 import * as selectors from "store/albumDetails/selectors";
 import * as services from "store/albumDetails/services";
@@ -11,6 +11,7 @@ import Lightbox from "components/Lightbox";
 import Navigation from "components/Navigation";
 import Photo from "components/Photo";
 import Spinner from "components/Spinner";
+
 import eng from "lang/eng";
 
 interface IActionsProps {

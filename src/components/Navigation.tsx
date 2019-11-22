@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useHistory } from "react-router";
 
 import eng from "lang/eng";
@@ -7,9 +7,7 @@ import "./Pagination.scss";
 
 const Navigation: React.FC = () => {
   const history = useHistory();
-
   const goBack = () => history.goBack();
-
   return (
     <nav className="page-nav">
       <button
