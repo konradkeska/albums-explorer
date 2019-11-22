@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 
 import eng from "lang/eng";
 
-import "./Pagination.scss";
+import "./Pagination/Pagination.scss";
 
 const Navigation: React.FC = () => {
   const history = useHistory();

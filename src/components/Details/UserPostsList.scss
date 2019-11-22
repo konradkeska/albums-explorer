@@ -1,0 +1,27 @@
+.user {
+  .list {
+    &__item {
+      width: 25%;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .user {
+    .list {
+      &__item {
+        width: 50%;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .user {
+    .list {
+      &__item {
+        width: 100%;
+      }
+    }
+  }
+}

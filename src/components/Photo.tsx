@@ -9,7 +9,7 @@ interface IProps {
 
 const Photo: React.FC<IProps> = ({ photo, onClick }) => {
   return (
-    <figure className="photo__container" key={photo.id}>
+    <figure className="photos__container" key={photo.id}>
       <img
         onClick={onClick(photo)}
         style={{ width: "100%" }}

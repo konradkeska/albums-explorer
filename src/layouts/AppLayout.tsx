@@ -12,7 +12,7 @@ const AppLayout: React.FC = ({ children }) => (
       <Search />
       <main className="content">{children}</main>
       <footer className="footer-bar">
-        <p className="text-normal copyright">© 2019</p>
+        <p className="text-normal copyright">2019 © Konrad Kęska</p>
         <p className="text-normal app-name">Album app</p>
       </footer>
     </div>

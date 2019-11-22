@@ -23,6 +23,10 @@
   font-size: 14px;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .text-header {
   margin-bottom: 30px;
   font-size: 16px;
@@ -36,7 +40,8 @@
 
 .key {
   border-radius: 3px;
-  padding: 1px 1px;
+  margin-left: 3px;
+  padding: 2px;
   color: #333;
   border: 1px solid #333;
   background-color: #fff;
@@ -95,7 +100,6 @@
 }
 
 .results,
-.photos,
 .user,
 .posts {
   margin-top: 30px;
@@ -121,51 +125,12 @@
   }
 }
 
-.user {
-  .list {
-    &__item {
-      width: 25%;
-    }
-  }
-}
-
 .album {
   width: 100%;
 }
 
-.photos {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-gap: 10px;
-  width: 100%;
-
-  img {
-    max-width: 100%;
-    &:hover {
-      cursor: pointer;
-      opacity: 0.9;
-    }
-  }
-
-  .photo__container {
-    position: relative;
-    margin: 0;
-    .top-left {
-      padding: 10px 15px;
-      background-color: #fafafa;
-      max-width: 50%;
-      top: 0px;
-      left: 0px;
-      position: absolute;
-      font-size: 12px;
-      border-bottom-right-radius: 15px;
-    }
-  }
-}
-
 .text-alert {
-  padding: 126.5px 0;
+  padding: 93px 0;
   font-size: 16px;
   text-align: center;
   margin-block-start: 0em;
@@ -189,61 +154,4 @@
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: normal;
-}
-
-@media (max-width: 1024px) {
-  .user {
-    .list {
-      &__item {
-        width: 50%;
-      }
-    }
-  }
-
-  .photos {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .photos {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  }
-
-  .tile {
-    display: inline-flex;
-    width: 100%;
-    padding: 20px 30px;
-    margin-bottom: 20px;
-    border: 1px solid #f5f5f5;
-    box-sizing: border-box;
-    background-color: #ffffff;
-  }
-}
-
-@media (max-width: 600px) {
-  .photos {
-    grid-template-columns: 1fr;
-    grid-template-rows: initial;
-  }
-
-  .page-nav {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .page-nav__button {
-    margin-top: 15px;
-    width: 100%;
-  }
-
-  .user {
-    .list {
-      &__item {
-        width: 100%;
-      }
-    }
-  }
 }

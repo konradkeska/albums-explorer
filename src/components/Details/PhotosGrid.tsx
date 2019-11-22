@@ -3,6 +3,8 @@ import { IPhoto } from "store/types";
 
 import Photo from "components/Photo";
 
+import "./PhotosGrid.scss";
+
 interface IPhotosProps {
   photos: IPhoto[];
   onPhotoClick: (image: IPhoto) => () => void;

@@ -1,6 +1,8 @@
 import * as React from "react";
 import { IPost } from "store/types";
 
+import "./UserPostsList.scss";
+
 interface IUserPostsListProps {
   userPosts: IPost[];
 }

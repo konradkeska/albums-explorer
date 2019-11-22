@@ -7,6 +7,7 @@ import * as services from "store/albums/services";
 import { IAlbum, IRootState, IUser } from "store/types";
 
 import Filters, { IFilter } from "components/Filters";
+import NoResults from "components/NoResults";
 import Pagination from "components/Pagination";
 import Spinner from "components/Spinner";
 import Tile from "components/Tile";
@@ -58,17 +59,23 @@ const Albums: React.FC<Props> = ({ albums, users, loadAlbums }) => {
       .filter((item) => item.id === userId)!!
       .map((item) => `${item.name} ${item.username}`)[0] || "-";
 
-  const Results = albums.map((album) => (
-    <Tile key={album.id} album={album} user={getAlbumUser(album.userId)} />
-  ));
+  const hasResults = albums && albums.length > 0;
+
+  const Results = hasResults ? (
+    albums.map((album) => (
+      <Tile key={album.id} album={album} user={getAlbumUser(album.userId)} />
+    ))
+  ) : (
+    <NoResults />
+  );
 
   return loading ? (
     <Spinner />
   ) : (
     <>
-      <Filters items={FILTER_ITEMS} />
+      {hasResults && <Filters items={FILTER_ITEMS} />}
       <section className="results">{Results}</section>
-      <Pagination />
+      {hasResults && <Pagination />}
     </>
   );
 };
