@@ -8,10 +8,10 @@ import { IAlbum, IRootState, IUser } from "store/types";
 
 import { setQueryParam } from "utils/helpers";
 
-import Filters, { IFilter } from "shared/Filters";
-import Tile from "shared/Tile";
-import Pagination from "shared/Pagination";
-import Spinner from "shared/Spinner";
+import Filters, { IFilter } from "components/Filters";
+import Pagination from "components/Pagination";
+import Spinner from "components/Spinner";
+import Tile from "components/Tile";
 
 import eng from "lang/eng";
 

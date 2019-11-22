@@ -2,7 +2,7 @@ import React from "react";
 
 import { ToastContainer } from "react-toastify";
 
-import Search from "shared/Search";
+import Search from "components/Search";
 
 import "./AppLayout.scss";
 

@@ -6,11 +6,12 @@ import * as selectors from "store/albumDetails/selectors";
 import * as services from "store/albumDetails/services";
 import { IAlbum, IPhoto, IPost, IRootState, IUser } from "store/types";
 
-import DetailRow from "shared/DetailRow";
-import Lightbox from "shared/Lightbox";
-import Navigation from "shared/Navigation";
-import Photo from "shared/Photo";
-import Spinner from "shared/Spinner";
+import DetailRow from "components/DetailRow";
+import Lightbox from "components/Lightbox";
+import Navigation from "components/Navigation";
+import Photo from "components/Photo";
+import Spinner from "components/Spinner";
+import eng from "lang/eng";
 
 interface IActionsProps {
   loadDetails: (albumId: number) => void;
@@ -82,16 +83,16 @@ const AlbumDetails: React.FC<Props> = ({
   const DetailsComponent = (
     <>
       <section className="album">
-        <h5 className="sub-title">Album title</h5>
+        <h5 className="sub-title">{eng.ALBUM_TITLE}</h5>
         <h1 className="uppercase">{album.title}</h1>
       </section>
       <section className="photos">{PhotosGrid}</section>
       <section className="posts">
-        <h5 className="sub-title">Recent posts</h5>
+        <h5 className="sub-title">{eng.RECENT_POSTS}</h5>
         {UserPostsList}
       </section>
       <section className="user">
-        <h5 className="sub-title">About author</h5>
+        <h5 className="sub-title">{eng.ABOUT_AUTHOR}</h5>
         {UserDetailsList}
       </section>
     </>

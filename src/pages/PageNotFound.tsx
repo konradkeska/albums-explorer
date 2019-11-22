@@ -1,7 +1,9 @@
-import * as React from "react";
+import React from "react";
+
+import eng from "lang/eng";
 
 const PageNotFound: React.FC = () => {
-  return <h3 className="uppercase">404: Page not found!</h3>;
+  return <h3 className="uppercase">{eng.PAGE_NOT_FOUND}</h3>;
 };
 
 export default PageNotFound;
