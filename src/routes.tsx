@@ -1,16 +1,20 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import { App } from "chunks";
+import { AlbumDetails, Albums, PageNotFound } from "chunks";
 
-import Spinner from "./shared/Spinner";
+import AppLayout from "layouts/AppLayout";
 
 export default (
   <Router>
-    <Suspense fallback={<Spinner />}>
-      <Switch>
-        <Route exact={true} path="/" component={App} />
-      </Switch>
-    </Suspense>
+    <AppLayout>
+      <Suspense fallback={null}>
+        <Switch>
+          <Route exact={true} path="/" component={Albums} />
+          <Route path="/albums/:id" component={AlbumDetails} />
+          <Route component={PageNotFound} />
+        </Switch>
+      </Suspense>
+    </AppLayout>
   </Router>
 );

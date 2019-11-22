@@ -1,5 +1,7 @@
-import { initialState } from "./albums/reducers";
+import albumDetails from "./albumDetails/initial";
+import albums from "./albums/initial";
 
 export default {
-  albums: initialState,
+  albumDetails,
+  albums,
 };

@@ -1,0 +1,157 @@
+.link:-webkit-any-link {
+  color: gray;
+  text-decoration: none;
+
+  &:hover {
+    color: black;
+    cursor: pointer;
+  }
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+:focus {
+  outline: none;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-normal {
+  font-size: 14px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-header {
+  margin-bottom: 30px;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 0px;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.key {
+  border-radius: 3px;
+  margin-left: 3px;
+  padding: 2px;
+  color: #333;
+  border: 1px solid #333;
+  background-color: #fff;
+}
+
+.content-wrapper {
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0px auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  background-color: #fafafa;
+  border-top: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f5f5f5;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.gray {
+  color: gray;
+}
+
+.footer-bar {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 0px 30px;
+  background-color: #ffffff;
+  color: #cccccc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+
+  .copyright {
+    text-align: left;
+  }
+  .app-name {
+    text-align: right;
+  }
+}
+
+.page-size,
+.sort {
+  width: 100%;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+}
+
+.results,
+.user,
+.posts {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  &__item {
+    width: 50%;
+  }
+}
+
+.posts {
+  .list {
+    &__item {
+      width: 100%;
+    }
+  }
+}
+
+.album {
+  width: 100%;
+}
+
+.text-alert {
+  padding: 93px 0;
+  font-size: 16px;
+  text-align: center;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+}
+
+.title,
+.author {
+  width: 100%;
+}
+
+.author {
+  text-align: right;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.sub-title {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: normal;
+}

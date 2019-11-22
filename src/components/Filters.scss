@@ -1,0 +1,12 @@
+.filters {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.filter__label {
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  color: gray;
+}
