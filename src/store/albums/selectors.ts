@@ -4,4 +4,6 @@ const getAlbums = ({ albums }: IRootState) => albums.list;
 
 const getUsers = ({ albums }: IRootState) => albums.users;
 
-export { getAlbums, getUsers };
+const getLastPage = ({ albums }: IRootState) => albums.lastPage;
+
+export { getAlbums, getUsers, getLastPage };

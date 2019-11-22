@@ -3,6 +3,7 @@ import {
   AlbumsActionType,
   IReceiveAlbumsAction,
   IReceiveUsersAction,
+  IReceiveLastPageAction,
 } from "./types";
 
 const receiveAlbums = (albums: IAlbum[]): IReceiveAlbumsAction => ({
@@ -15,4 +16,9 @@ const receiveUsers = (users: IUser[]): IReceiveUsersAction => ({
   type: AlbumsActionType.RECEIVE_USERS,
 });
 
-export { receiveAlbums, receiveUsers };
+const receiveLastPage = (page: number): IReceiveLastPageAction => ({
+  payload: { page },
+  type: AlbumsActionType.RECEIVE_LAST_PAGE,
+});
+
+export { receiveAlbums, receiveUsers, receiveLastPage };

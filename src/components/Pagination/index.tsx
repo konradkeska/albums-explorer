@@ -3,11 +3,18 @@ import { useHistory, useLocation } from "react-router";
 
 import { setQueryParam } from "utils/helpers";
 
+import PageNavButton from "./PaginationButton";
+
 import eng from "lang/eng";
 
 import "./Pagination.scss";
 
-const Pagination: React.FC = () => {
+interface IProps {
+  lastPage?: number;
+  setLoading: (value: React.SetStateAction<boolean>) => void;
+}
+
+const Pagination: React.FC<IProps> = ({ setLoading, lastPage }) => {
   const history = useHistory();
   const location = useLocation();
 
@@ -15,30 +22,33 @@ const Pagination: React.FC = () => {
   const pageParam = currentUrlParams.get("_page");
   const currentPage = pageParam ? Number(pageParam) : 1;
 
-  const goToNextPage = () =>
+  const goToNextPage = () => {
+    setLoading(true);
     setQueryParam("_page", (currentPage + 1).toString(), history);
+  };
 
-  const goToPrevPage = () =>
+  const goToPrevPage = () => {
+    setLoading(true);
     setQueryParam("_page", (currentPage - 1).toString(), history);
+  };
 
   return (
     <nav className="page-nav">
-      <button
+      <PageNavButton
+        label={eng.PREV}
+        isActive={currentPage !== 1}
         disabled={currentPage === 1}
         onClick={goToPrevPage}
-        className="page-nav__button page-nav__button"
-      >
-        {eng.PREV}
-      </button>
+      />
       <p className="text-normal gray">
         {eng.PAGE} <span className="bold">{currentPage}</span>
       </p>
-      <button
+      <PageNavButton
+        label={eng.NEXT}
+        isActive={currentPage !== lastPage}
+        disabled={currentPage === lastPage}
         onClick={goToNextPage}
-        className="page-nav__button page-nav__button--active"
-      >
-        {eng.NEXT}
-      </button>
+      />
     </nav>
   );
 };

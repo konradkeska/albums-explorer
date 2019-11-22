@@ -23,4 +23,17 @@ const setQueryParam = (field: QueryField, value: string, history: History) => {
   }
 };
 
-export { debounce, setQueryParam };
+const getLastPageFromLinkRel = (linkHeader: string) => {
+  const arrData: string[] = linkHeader.split(",");
+  const lastLinkRel = arrData.find((item) => item.includes('rel="last"'));
+  if (lastLinkRel) {
+    // couldn't find a better way receive last page indicator
+    const lastLinkUrl = lastLinkRel.slice(
+      lastLinkRel.indexOf("<") + 1,
+      lastLinkRel.indexOf('>; rel="last"'),
+    );
+    return new URLSearchParams(lastLinkUrl).get("_page");
+  }
+};
+
+export { debounce, setQueryParam, getLastPageFromLinkRel };

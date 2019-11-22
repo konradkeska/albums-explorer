@@ -23,13 +23,14 @@ interface IActionsProps {
 interface IConnectedProps {
   albums: IAlbum[];
   users: IUser[];
+  lastPage?: number;
 }
 
 type Props = IActionsProps & IConnectedProps;
 
 const ALBUMS_PRELOAD_TIMEOUT = 1000;
 
-const Albums: React.FC<Props> = ({ albums, users, loadAlbums }) => {
+const Albums: React.FC<Props> = ({ albums, users, loadAlbums, lastPage }) => {
   const location = useLocation();
   const history = useHistory();
   const [loading, setLoading] = useState<boolean>(true);
@@ -49,6 +50,7 @@ const Albums: React.FC<Props> = ({ albums, users, loadAlbums }) => {
       onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {
         setLoading(true);
         setQueryParam("_limit", e.currentTarget.value, history);
+        setQueryParam("_page", "1", history);
       },
       options: [5, 10, 20, 50, 100],
     } as IFilter<number>,
@@ -75,7 +77,7 @@ const Albums: React.FC<Props> = ({ albums, users, loadAlbums }) => {
     <>
       {hasResults && <Filters items={FILTER_ITEMS} />}
       <section className="results">{Results}</section>
-      {hasResults && <Pagination />}
+      {hasResults && <Pagination setLoading={setLoading} lastPage={lastPage} />}
     </>
   );
 };
@@ -87,6 +89,7 @@ const mapDispatchToProps = {
 const mapStateToProps = (state: IRootState): IConnectedProps => ({
   albums: selectors.getAlbums(state),
   users: selectors.getUsers(state),
+  lastPage: selectors.getLastPage(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Albums);
