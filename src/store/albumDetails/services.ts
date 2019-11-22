@@ -2,20 +2,9 @@ import * as actions from "./actions";
 import * as api from "./api";
 
 import { ApiAction } from "store/types";
-import {
-  IReceiveAlbumAction,
-  IReceivePhotosAction,
-  IReceiveUserAction,
-  IReceiveUserPostsAction,
-} from "./types";
+import { LoadDetailsActions } from "./types";
 
-type DetailsAction =
-  | IReceiveAlbumAction
-  | IReceivePhotosAction
-  | IReceiveUserAction
-  | IReceiveUserPostsAction;
-
-const loadDetails = (albumId: number): ApiAction<DetailsAction> => async (
+const loadDetails = (albumId: number): ApiAction<LoadDetailsActions> => async (
   dispatch,
 ) => {
   const [{ data: albumData }, { data: photosData }] = await Promise.all([

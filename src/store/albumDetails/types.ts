@@ -7,6 +7,12 @@ export enum AlbumDetailsActionType {
   RECEIVE_USER_POSTS = "albumDetails/receive_user_posts",
 }
 
+export type LoadDetailsActions =
+  | IReceiveAlbumAction
+  | IReceivePhotosAction
+  | IReceiveUserAction
+  | IReceiveUserPostsAction;
+
 export interface IAlbumsAction {
   type: AlbumDetailsActionType;
 }

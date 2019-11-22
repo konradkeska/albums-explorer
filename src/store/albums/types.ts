@@ -5,6 +5,8 @@ export enum AlbumsActionType {
   RECEIVE_USERS = "albums/receive_users",
 }
 
+export type LoadAlbumsActions = IReceiveAlbumsAction | IReceiveUsersAction;
+
 export interface IAlbumsAction {
   type: AlbumsActionType;
 }
