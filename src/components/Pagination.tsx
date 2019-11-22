@@ -2,6 +2,8 @@ import React from "react";
 
 import eng from "lang/eng";
 
+import "./Pagination.scss";
+
 const Pagination: React.FC = () => {
   return (
     <nav className="page-nav">
@@ -10,8 +12,7 @@ const Pagination: React.FC = () => {
       </button>
       <p className="text-normal">
         <span className="gray">
-          {eng.PAGE} <span className="bold">7</span> {eng.OF}{" "}
-          <span className="bold">100</span>
+          {eng.PAGE} <span className="bold">7</span>
         </span>
       </p>
       <button className="page-nav__button page-nav__button--active">

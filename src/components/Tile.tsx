@@ -1,26 +1,24 @@
 import React from "react";
+
 import { IAlbum } from "store/types";
 
-interface IListTileProps {
+import "./Tile.scss";
+
+interface ITileProps {
   album: Omit<IAlbum, "userId">;
   index: number;
   user: string;
 }
 
-const ListTile: React.FC<IListTileProps> = ({
-  album: { id, title },
-  index,
-  user,
-}) => (
-  <a key={id} className="link result-tile" href={`/albums/${id}`}>
-    <ul className="list result-tile__details">
+const Tile: React.FC<ITileProps> = ({ album: { id, title }, index, user }) => (
+  <a key={id} className="link tile" href={`/albums/${id}`}>
+    <ul className="list tile__details">
       <li className="list-item text-normal title">
-        <span className="pr-15">{index + 1}.</span>
+        <span style={{ paddingRight: "15px" }}>{index + 1}.</span>
         <span className="bold uppercase">{title}</span>
       </li>
       <li className="list-item text-normal author">{user}</li>
     </ul>
   </a>
 );
-
-export default ListTile;
+export default Tile;

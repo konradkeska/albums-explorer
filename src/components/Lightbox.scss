@@ -1,0 +1,19 @@
+.lightbox {
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #eeede9;
+  overflow-y: hidden !important;
+  background-color: rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+
+  img {
+    max-width: 100%;
+  }
+}
