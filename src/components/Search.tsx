@@ -7,13 +7,15 @@ import "./Search.scss";
 
 const Search: React.FC = () => {
   const location = useLocation();
-
   const currentUrlParams = new URLSearchParams(location.search);
   const qParam = currentUrlParams.get("q");
-
   const isPresent = !location.pathname.includes("albums/");
 
-  return isPresent ? (
+  if (!isPresent) {
+    return null;
+  }
+
+  return (
     <form className="search-form">
       <input
         className="search-form__input"
@@ -24,7 +26,7 @@ const Search: React.FC = () => {
         disabled={location.pathname.includes("albums/")}
       />
     </form>
-  ) : null;
+  );
 };
 
 export default Search;

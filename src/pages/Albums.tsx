@@ -58,38 +58,37 @@ const Albums: React.FC<Props> = ({ albums, users, loadAlbums, lastPage }) => {
 
   const getAlbumUser = (userId: number) =>
     users
-      .filter((item) => item.id === userId)!!
-      .map((item) => `${item.name} ${item.username}`)[0] || "-";
+      .filter(({ id }) => id === userId)!!
+      .map(({ name, username }) => `${name} ${username}`)[0] || "-";
 
   const hasResults = albums && albums.length > 0;
 
-  const Results = hasResults ? (
-    albums.map((album) => (
-      <Tile key={album.id} album={album} user={getAlbumUser(album.userId)} />
-    ))
-  ) : (
-    <NoResults />
-  );
+  const renderResults = () => {
+    if (hasResults) {
+      return albums.map((album) => (
+        <Tile key={album.id} album={album} user={getAlbumUser(album.userId)} />
+      ));
+    }
+    return <NoResults />;
+  };
 
   return loading ? (
     <Spinner />
   ) : (
     <>
       {hasResults && <Filters items={FILTER_ITEMS} />}
-      <section className="results">{Results}</section>
+      <section className="results full-width">{renderResults()}</section>
       {hasResults && <Pagination setLoading={setLoading} lastPage={lastPage} />}
     </>
   );
 };
 
-const mapDispatchToProps = {
-  loadAlbums: services.loadAlbums,
-};
+const mapDispatchToProps = { loadAlbums: services.loadAlbums };
 
 const mapStateToProps = (state: IRootState): IConnectedProps => ({
   albums: selectors.getAlbums(state),
-  users: selectors.getUsers(state),
   lastPage: selectors.getLastPage(state),
+  users: selectors.getUsers(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Albums);

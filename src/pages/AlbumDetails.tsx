@@ -23,18 +23,19 @@ const ALBUM_DETAILS_PRELOAD_TIMEOUT = 1000;
 const AlbumDetails: React.FC<IActionsProps> = ({ loadDetails }) => {
   const { id } = useParams();
   const history = useHistory();
-  const [loading, setLoading] = useState<boolean>(true);
+
+  const goBack = () => history.goBack();
 
   const [lightboxImage, setLightboxImage] = useState<IPhoto | null>(null);
 
   const openLightbox = (image: IPhoto) => () => setLightboxImage(image);
   const closeLightbox = () => setLightboxImage(null);
 
-  const goBack = () => history.goBack();
-
   const LightboxComponent = lightboxImage && (
     <Lightbox image={lightboxImage && lightboxImage} onClose={closeLightbox} />
   );
+
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     loadDetails(Number(id));
@@ -52,8 +53,6 @@ const AlbumDetails: React.FC<IActionsProps> = ({ loadDetails }) => {
   );
 };
 
-const mapDispatchToProps = {
-  loadDetails: services.loadDetails,
-};
+const mapDispatchToProps = { loadDetails: services.loadDetails };
 
 export default connect(null, mapDispatchToProps)(AlbumDetails);

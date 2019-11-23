@@ -1,11 +1,14 @@
 import React from "react";
 
+import eng from "lang/eng";
+
+import "./NoResults.scss";
+
 const NoResults: React.FC = () => (
   <div className="text-alert">
-    <p>Sorry, no results were found. </p>
+    <p>{eng.RESULTS_NOT_FOUND}</p>
     <p>
-      To start searching again: enter phrase and hit&nbsp;
-      <kbd className="key">Enter</kbd>.
+      {eng.SEARCH_AGAIN} <kbd className="key">{eng.ENTER}</kbd>.
     </p>
   </div>
 );

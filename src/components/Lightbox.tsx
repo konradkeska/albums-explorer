@@ -1,44 +1,33 @@
 import React, { useEffect, useState } from "react";
 
 import { IPhoto } from "store/types";
+import { disableScrolling, enableScrolling } from "utils/helpers";
 
 import Spinner from "./Spinner";
 
 import "./Lightbox.scss";
 
-interface IProps {
+export interface ILightboxProps {
   image: IPhoto;
   onClose: () => void;
 }
 
 const LIGHTBOX_PRELOAD_TIMEOUT: number = 1000;
 
-const Lightbox: React.FC<IProps> = ({ image, onClose }) => {
-  const [loading, setLoading] = useState(true);
-
-  const disableScrolling = () => {
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${window.scrollY}px`;
-  };
-
-  const enableScrolling = () => {
-    const scrollY = document.body.style.top;
-    document.body.style.position = "";
-    document.body.style.top = "";
-    window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
-  };
-
+const Lightbox: React.FC<ILightboxProps> = ({ image, onClose }) => {
   useEffect(() => {
     disableScrolling();
     setTimeout(() => setLoading(false), LIGHTBOX_PRELOAD_TIMEOUT);
   }, []);
 
-  const Image = <img src={image.url} alt={image.title} />;
+  const [loading, setLoading] = useState(true);
 
   const handleClose = () => {
     onClose();
     enableScrolling();
   };
+
+  const Image = <img src={image.url} alt={image.title} />;
 
   return (
     <div className="lightbox" onClick={handleClose}>

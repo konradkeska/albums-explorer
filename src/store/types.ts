@@ -16,6 +16,12 @@ export type ApiAction<T extends Action<any>> = ThunkAction<
   T
 >;
 
+export interface IDictionary<T> {
+  [key: string]: T;
+}
+
+export type QueryField = "q" | "_limit" | "_page" | "_q" | "_order";
+
 export interface IPagination {
   page: number;
   limit: number;

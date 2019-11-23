@@ -1,22 +1,25 @@
-import { IDictionary } from "types";
+import { IDictionary } from "store/types";
 
 export default {
   ABOUT_AUTHOR: "about author",
   ALBUM_TITLE: "album title",
   EMAIL: "email",
+  ENTER: "enter",
   ERROR_OCCURED: "An error occured",
   GO_BACK: "go back",
   NAME: "name",
   NEXT: "next",
   OF: "of",
   ORDER: "order",
-  PAGE_NOT_FOUND: "404: Page not found!",
   PAGE: "page",
+  PAGE_NOT_FOUND: "404: Page not found!",
   PHONE: "phone",
   PREV: "previous",
   RECENT_POSTS: "recent posts",
   RESULTS: "results",
+  RESULTS_NOT_FOUND: "Sorry, no results were found.",
   SEARCH: "Search...",
+  SEARCH_AGAIN: "To start searching again: enter phrase and hit",
   SOME_MESSAGE: "Some message",
   SUCCESS: "Success",
   WEBSITE: "website",

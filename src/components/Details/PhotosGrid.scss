@@ -14,20 +14,6 @@
       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
     }
   }
-  &__container {
-    position: relative;
-    margin: 0;
-    .top-left {
-      padding: 10px 15px;
-      background-color: #fafafa;
-      max-width: 50%;
-      top: 0px;
-      left: 0px;
-      position: absolute;
-      font-size: 12px;
-      border-bottom-right-radius: 15px;
-    }
-  }
 }
 
 @media (max-width: 1024px) {

@@ -11,7 +11,7 @@ export interface IFilter<T> {
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-interface IFiltersProps {
+export interface IFiltersProps {
   items: Array<IFilter<string | number>>;
 }
 

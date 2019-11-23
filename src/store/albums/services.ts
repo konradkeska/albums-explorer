@@ -1,26 +1,23 @@
+import { AxiosResponse } from "axios";
+
 import * as actions from "./actions";
 import * as api from "./api";
 
-import { ApiAction } from "store/types";
+import { ApiAction, IAlbum } from "store/types";
 import { LoadAlbumsActions } from "./types";
+
 import { getLastPageFromLinkRel } from "utils/helpers";
 
 const loadAlbums = (): ApiAction<LoadAlbumsActions> => async (dispatch) => {
-  const [{ data: albumsData }, { data: usersData }] = await Promise.all([
-    api.loadAlbums().then((response) => {
-      const linkHeader: string | undefined =
-        response && response.headers && response.headers.link;
+  const receiveLastPage = (res: AxiosResponse<IAlbum[]>) => {
+    const linkHeader: string = (res && res.headers && res.headers.link) || "";
+    const lastPage = getLastPageFromLinkRel(linkHeader);
+    lastPage && dispatch(actions.receiveLastPage(Number(lastPage)));
+    return res;
+  };
 
-      if (linkHeader) {
-        const arrData: string[] = linkHeader.split(",");
-        const lastLinkRel = arrData.find((item) => item.includes('rel="last"'));
-        if (lastLinkRel) {
-          const lastPage = getLastPageFromLinkRel(lastLinkRel);
-          lastPage && dispatch(actions.receiveLastPage(Number(lastPage)));
-        }
-      }
-      return response;
-    }),
+  const [{ data: albumsData }, { data: usersData }] = await Promise.all([
+    api.loadAlbums().then(receiveLastPage),
     api.loadUsers(),
   ]);
   dispatch(actions.receiveAlbums(albumsData));

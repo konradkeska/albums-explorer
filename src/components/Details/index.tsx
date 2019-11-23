@@ -5,10 +5,12 @@ import * as selectors from "store/albumDetails/selectors";
 import { IAlbum, IPhoto, IPost, IRootState, IUser } from "store/types";
 
 import PhotosGrid from "./PhotosGrid";
-
-import eng from "lang/eng";
 import UserDetails from "./UserDetailsList";
 import UserPostsList from "./UserPostsList";
+
+import eng from "lang/eng";
+
+import "./index.scss";
 
 interface IConnectedProps {
   album: IAlbum;
@@ -38,11 +40,11 @@ const Details: React.FC<Props> = ({
     <section className="photos">
       <PhotosGrid photos={photos} onPhotoClick={onPhotoClick} />
     </section>
-    <section className="posts">
+    <section className="posts full-width">
       <h5 className="sub-title">{eng.RECENT_POSTS}</h5>
       <UserPostsList userPosts={userPosts} />
     </section>
-    <section className="user">
+    <section className="user full-width">
       <h5 className="sub-title">{eng.ABOUT_AUTHOR}</h5>
       <UserDetails user={user} />
     </section>

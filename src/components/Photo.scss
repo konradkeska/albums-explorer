@@ -1,0 +1,14 @@
+.photos__container {
+  position: relative;
+  margin: 0;
+  .top-left {
+    padding: 10px 15px;
+    background-color: #fafafa;
+    max-width: 50%;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    font-size: 12px;
+    border-bottom-right-radius: 15px;
+  }
+}

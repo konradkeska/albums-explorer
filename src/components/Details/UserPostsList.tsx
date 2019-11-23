@@ -10,11 +10,11 @@ interface IUserPostsListProps {
 const UserPostsList: React.FC<IUserPostsListProps> = ({ userPosts }) => {
   const ListItems =
     userPosts &&
-    userPosts.map((item) => (
-      <li className="list__item" key={item.id}>
+    userPosts.map(({ id, title, body }) => (
+      <li className="list__item" key={id}>
         <article>
-          <h3>{item.title}</h3>
-          <p>{item.body}</p>
+          <h3>{title}</h3>
+          <p>{body}</p>
         </article>
       </li>
     ));

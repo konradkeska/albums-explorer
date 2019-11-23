@@ -1,4 +1,5 @@
 import { History } from "history";
+import { QueryField } from "store/types";
 
 const debounce = (func: any = alert, timeout = 500) => {
   let timeoutId: any;
@@ -11,8 +12,6 @@ const debounce = (func: any = alert, timeout = 500) => {
   };
 };
 
-export type QueryField = "q" | "_limit" | "_page" | "_q" | "_order";
-
 const setQueryParam = (field: QueryField, value: string, history: History) => {
   const currentUrlParams = new URLSearchParams(window.location.search);
   currentUrlParams.set(field, value);
@@ -24,16 +23,33 @@ const setQueryParam = (field: QueryField, value: string, history: History) => {
 };
 
 const getLastPageFromLinkRel = (linkHeader: string) => {
-  const arrData: string[] = linkHeader.split(",");
-  const lastLinkRel = arrData.find((item) => item.includes('rel="last"'));
-  if (lastLinkRel) {
-    // couldn't find a better way receive last page indicator
-    const lastLinkUrl = lastLinkRel.slice(
-      lastLinkRel.indexOf("<") + 1,
-      lastLinkRel.indexOf('>; rel="last"'),
+  const linkRels: string[] = linkHeader.split(",");
+  const lastPageRel = linkRels.find((item) => item.includes('rel="last"'));
+  if (lastPageRel) {
+    const lastLinkUrl = lastPageRel.slice(
+      lastPageRel.indexOf("<") + 1,
+      lastPageRel.indexOf('>; rel="last"'),
     );
     return new URLSearchParams(lastLinkUrl).get("_page");
   }
 };
 
-export { debounce, setQueryParam, getLastPageFromLinkRel };
+const disableScrolling = () => {
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${window.scrollY}px`;
+};
+
+const enableScrolling = () => {
+  const scrollY = document.body.style.top;
+  document.body.style.position = "";
+  document.body.style.top = "";
+  window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
+};
+
+export {
+  debounce,
+  setQueryParam,
+  getLastPageFromLinkRel,
+  disableScrolling,
+  enableScrolling,
+};

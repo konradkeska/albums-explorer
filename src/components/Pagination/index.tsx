@@ -40,7 +40,7 @@ const Pagination: React.FC<IProps> = ({ setLoading, lastPage }) => {
         disabled={currentPage === 1}
         onClick={goToPrevPage}
       />
-      <p className="text-normal gray">
+      <p className="text-normal">
         {eng.PAGE} <span className="bold">{currentPage}</span>
       </p>
       <PageNavButton

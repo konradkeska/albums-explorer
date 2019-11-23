@@ -2,12 +2,14 @@ import React from "react";
 
 import { IPhoto } from "store/types";
 
-interface IProps {
+import "./Photo.scss";
+
+export interface IPhotoProps {
   photo: IPhoto;
   onClick: (image: IPhoto) => () => void;
 }
 
-const Photo: React.FC<IProps> = ({ photo, onClick }) => {
+const Photo: React.FC<IPhotoProps> = ({ photo, onClick }) => {
   return (
     <figure className="photos__container" key={photo.id}>
       <img
