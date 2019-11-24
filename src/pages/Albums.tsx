@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
 
 import * as selectors from "store/albums/selectors";
 import * as services from "store/albums/services";
-import { IAlbum, IRootState, IUser } from "store/types";
+import { IAlbum, IRootState } from "store/types";
 
 import Filters, { IFilter } from "components/Filters";
 import NoResults from "components/NoResults";
@@ -14,6 +14,7 @@ import Spinner from "components/Spinner";
 
 import { PRELOAD_TIMEOUT } from "config/constants";
 import { setQueryParam } from "utils/helpers";
+import { useQueryParam } from "utils/hooks";
 
 import eng from "lang/eng";
 
@@ -23,25 +24,22 @@ interface IActionsProps {
 
 interface IConnectedProps {
   albums: IAlbum[];
-  users: IUser[];
   lastPage?: number;
 }
 
 type Props = IActionsProps & IConnectedProps;
 
-const Albums: React.FC<Props> = ({ albums, users, loadAlbums, lastPage }) => {
-  const location = useLocation();
+const Albums: React.FC<Props> = ({ albums, loadAlbums, lastPage }) => {
   const history = useHistory();
   const [loading, setLoading] = useState<boolean>(true);
 
-  const currentUrlParams = new URLSearchParams(location.search);
-  const currentUrlParamsString = currentUrlParams.toString();
-  const limitParam = currentUrlParams.get("_limit");
+  const [limitParam, currentUrlParams] = useQueryParam("_limit");
+  const queryString = currentUrlParams.toString();
 
   useEffect(() => {
     loadAlbums();
     setTimeout(() => setLoading(false), PRELOAD_TIMEOUT);
-  }, [loadAlbums, currentUrlParamsString]);
+  }, [loadAlbums, queryString]);
 
   const FILTER_ITEMS = [
     {
@@ -74,7 +72,6 @@ const mapDispatchToProps = { loadAlbums: services.loadAlbums };
 const mapStateToProps = (state: IRootState): IConnectedProps => ({
   albums: selectors.getAlbums(state),
   lastPage: selectors.getLastPage(state),
-  users: selectors.getUsers(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Albums);

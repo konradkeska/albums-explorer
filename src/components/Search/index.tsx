@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router";
+
+import { useQueryParam } from "utils/hooks";
 
 import eng from "lang/eng";
 
 import "./Search.scss";
 
 const Search: React.FC = () => {
-  const location = useLocation();
-  const currentUrlParams = new URLSearchParams(location.search);
-  const qParam = currentUrlParams.get("q");
-  const isPresent = !location.pathname.includes("albums/");
+  const { pathname } = useLocation();
+  const [qParam] = useQueryParam("q");
+  const [query, setQuery] = useState(qParam || "");
 
-  if (!isPresent) {
+  if (pathname !== "/") {
     return null;
   }
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setQuery(e.currentTarget.value);
 
   return (
     <form className="search-form">
@@ -21,9 +25,10 @@ const Search: React.FC = () => {
         className="search-form__input"
         type="search"
         name="q"
-        placeholder={qParam || eng.SEARCH}
+        value={query as string}
+        onChange={onChange}
+        placeholder={eng.SEARCH}
         autoFocus={true}
-        disabled={location.pathname.includes("albums/")}
       />
     </form>
   );

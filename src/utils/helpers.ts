@@ -1,4 +1,5 @@
 import { History } from "history";
+
 import { QueryField } from "store/types";
 
 const debounce = (func: any = alert, timeout = 500) => {
@@ -46,10 +47,15 @@ const enableScrolling = () => {
   window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
 };
 
+const scrollToTop = () => {
+  window.scrollTo(0, 0);
+};
+
 export {
   debounce,
   setQueryParam,
   getLastPageFromLinkRel,
   disableScrolling,
   enableScrolling,
+  scrollToTop,
 };

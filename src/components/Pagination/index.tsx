@@ -1,7 +1,8 @@
 import React from "react";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
 
-import { setQueryParam } from "utils/helpers";
+import { scrollToTop, setQueryParam } from "utils/helpers";
+import { useQueryParam } from "utils/hooks";
 
 import NavButton from "../NavButton";
 
@@ -16,16 +17,15 @@ interface IProps {
 
 const Pagination: React.FC<IProps> = ({ setLoading, lastPage }) => {
   const history = useHistory();
-  const location = useLocation();
 
-  const currentUrlParams = new URLSearchParams(location.search);
-  const pageParam = currentUrlParams.get("_page");
+  const [pageParam] = useQueryParam("_page");
   const currentPage = pageParam ? Number(pageParam) : 1;
 
   const handlePageChange = (direction: "next" | "prev") => () => {
     const nextPage = direction === "next" ? currentPage + 1 : currentPage - 1;
     setLoading && setLoading(true);
     setQueryParam("_page", nextPage.toString(), history);
+    scrollToTop();
   };
 
   return (
@@ -36,7 +36,7 @@ const Pagination: React.FC<IProps> = ({ setLoading, lastPage }) => {
         disabled={currentPage === 1}
         onClick={handlePageChange("prev")}
       />
-      <p className="text-normal">
+      <p className="page-nav__label text-normal">
         {eng.PAGE} <span className="bold">{currentPage}</span>
       </p>
       <NavButton
