@@ -1,15 +1,17 @@
+@import "../../../config/style-base.scss";
+
 .tile {
   display: inline-flex;
-  width: calc(50% - 15px);
-  padding: 20px 30px;
-  margin-bottom: 20px;
-  border: 1px solid #f5f5f5;
+  width: calc(50% - #{$length-small});
+  padding: calc(#{$length-medium * 0.6666}) $length-medium;
+  margin-bottom: calc(#{$length-medium * 0.6666});
+  border: $border;
   box-sizing: border-box;
-  background-color: #ffffff;
+  background-color: $white;
   height: 140px;
 
   &:nth-child(2n + 1) {
-    margin-right: 30px;
+    margin-right: $length-medium;
   }
 
   &:hover {
@@ -31,9 +33,9 @@
   .tile {
     display: inline-flex;
     width: 100%;
-    padding: 20px 30px;
-    margin-bottom: 20px;
-    border: 1px solid #f5f5f5;
+    padding: calc(#{$length-medium * 0.6666}) $length-medium;
+    margin-bottom: calc(#{$length-medium * 0.6666});
+    border: $border;
     box-sizing: border-box;
     background-color: #ffffff;
   }

@@ -1,34 +1,35 @@
+@import "../../config/style-base.scss";
+
 .toast {
   &__font {
-    margin-left: 30px;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-      Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+    margin-left: $length-medium;
+    font-family: $font-main;
   }
 
   &--danger {
-    color: #ef476f;
-    background-color: #f8d7da;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    color: $red;
+    background-color: $light-red;
+    box-shadow: $shadow;
     &__progress-bar {
-      background: #ef476f;
+      background: $red;
     }
   }
 
   &--secondary {
-    color: #617277;
-    background-color: #e2e3e5;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    color: $secondary;
+    background-color: $light-secondary;
+    box-shadow: $shadow;
     &__progress-bar {
-      background: #617277;
+      background: $secondary;
     }
   }
 
   &--success {
-    color: #1ad378;
-    background-color: #d4edda;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    color: $green;
+    background-color: $light-green;
+    box-shadow: $shadow;
     &__progress-bar {
-      background: #1ad378;
+      background: $green;
     }
   }
 }

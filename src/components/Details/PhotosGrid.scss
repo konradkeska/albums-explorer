@@ -1,10 +1,12 @@
+@import "../../config/style-base.scss";
+
 .photos {
   display: grid;
-  margin-top: 30px;
+  margin-top: $length-medium;
   width: 100%;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  grid-gap: 10px;
+  grid-gap: calc(#{$length-medium} / 3);
   width: 100%;
   .image {
     width: 100%;
@@ -12,7 +14,7 @@
     &:hover {
       cursor: pointer;
       opacity: 0.9;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+      box-shadow: $shadow;
     }
   }
 }

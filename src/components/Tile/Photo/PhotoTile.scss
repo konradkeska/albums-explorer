@@ -1,14 +1,16 @@
+@import "../../../config/style-base.scss";
+
 .photo-tile {
   position: relative;
   margin: 0;
   &__title {
-    padding: 10px 15px;
+    padding: calc(#{$length-small * 0.6666}) $length-small;
     background-color: #fafafa;
     max-width: 50%;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     position: absolute;
-    font-size: 12px;
-    border-bottom-right-radius: 15px;
+    font-size: $font-small;
+    border-bottom-right-radius: $length-small;
   }
 }
