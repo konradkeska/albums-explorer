@@ -38,18 +38,11 @@
   width: 100%;
 }
 
-.text-header {
-  margin-bottom: 30px;
-  font-size: 16px;
-  text-align: center;
-  margin-top: 0px;
-}
-
 .bold {
   font-weight: 600;
 }
 
-.content-wrapper {
+.wrapper {
   max-width: 1280px;
   display: flex;
   flex-direction: column;
@@ -87,12 +80,6 @@
   }
 }
 
-.results,
-.user,
-.posts {
-  margin-top: 30px;
-}
-
 .list {
   margin: 0;
   padding: 0;
@@ -102,12 +89,4 @@
   &__item {
     width: 50%;
   }
-}
-
-.text-alert {
-  padding: 93px 0;
-  font-size: 16px;
-  text-align: center;
-  margin-block-start: 0em;
-  margin-block-end: 0em;
 }

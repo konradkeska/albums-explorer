@@ -15,22 +15,21 @@
     border-radius: 30px;
     font: 400 14px -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
       Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
-  }
 
-  &__input:hover,
-  &__input:focus {
-    border: 1px solid #f0f0f0;
-  }
-  &__input:focus {
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-  }
-
-  &__input[disabled],
-  &__input[disabled]:hover,
-  &__input[disabled]:focus {
-    border: none !important;
-    color: #eee !important;
-    box-shadow: none !important;
+    &:hover,
+    &:focus {
+      border: 1px solid #f0f0f0;
+    }
+    &:focus {
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    &[disabled],
+    &[disabled]:hover,
+    &[disabled]:focus {
+      border: none !important;
+      color: #eee !important;
+      box-shadow: none !important;
+    }
   }
 }
 

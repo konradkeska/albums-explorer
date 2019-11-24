@@ -1,7 +1,7 @@
-.photos__container {
+.photo-tile {
   position: relative;
   margin: 0;
-  .top-left {
+  &__title {
     padding: 10px 15px;
     background-color: #fafafa;
     max-width: 50%;

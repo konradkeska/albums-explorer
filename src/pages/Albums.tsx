@@ -9,9 +9,10 @@ import { IAlbum, IRootState, IUser } from "store/types";
 import Filters, { IFilter } from "components/Filters";
 import NoResults from "components/NoResults";
 import Pagination from "components/Pagination";
+import Results from "components/Results";
 import Spinner from "components/Spinner";
-import Tile from "components/Tile";
 
+import { PRELOAD_TIMEOUT } from "config/constants";
 import { setQueryParam } from "utils/helpers";
 
 import eng from "lang/eng";
@@ -28,8 +29,6 @@ interface IConnectedProps {
 
 type Props = IActionsProps & IConnectedProps;
 
-const ALBUMS_PRELOAD_TIMEOUT = 1000;
-
 const Albums: React.FC<Props> = ({ albums, users, loadAlbums, lastPage }) => {
   const location = useLocation();
   const history = useHistory();
@@ -37,15 +36,16 @@ const Albums: React.FC<Props> = ({ albums, users, loadAlbums, lastPage }) => {
 
   const currentUrlParams = new URLSearchParams(location.search);
   const currentUrlParamsString = currentUrlParams.toString();
+  const limitParam = currentUrlParams.get("_limit");
 
   useEffect(() => {
     loadAlbums();
-    setTimeout(() => setLoading(false), ALBUMS_PRELOAD_TIMEOUT);
+    setTimeout(() => setLoading(false), PRELOAD_TIMEOUT);
   }, [loadAlbums, currentUrlParamsString]);
 
   const FILTER_ITEMS = [
     {
-      defaultValue: Number(currentUrlParams.get("_limit")) || 100,
+      defaultValue: Number(limitParam) || 100,
       label: eng.RESULTS,
       onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {
         setLoading(true);
@@ -56,28 +56,14 @@ const Albums: React.FC<Props> = ({ albums, users, loadAlbums, lastPage }) => {
     } as IFilter<number>,
   ];
 
-  const getAlbumUser = (userId: number) =>
-    users
-      .filter(({ id }) => id === userId)!!
-      .map(({ name, username }) => `${name} ${username}`)[0] || "-";
-
   const hasResults = albums && albums.length > 0;
-
-  const renderResults = () => {
-    if (hasResults) {
-      return albums.map((album) => (
-        <Tile key={album.id} album={album} user={getAlbumUser(album.userId)} />
-      ));
-    }
-    return <NoResults />;
-  };
 
   return loading ? (
     <Spinner />
   ) : (
     <>
       {hasResults && <Filters items={FILTER_ITEMS} />}
-      <section className="results full-width">{renderResults()}</section>
+      {hasResults ? <Results /> : <NoResults />}
       {hasResults && <Pagination setLoading={setLoading} lastPage={lastPage} />}
     </>
   );

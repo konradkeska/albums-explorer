@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 import { IPhoto } from "store/types";
+
+import { PRELOAD_TIMEOUT } from "config/constants";
 import { disableScrolling, enableScrolling } from "utils/helpers";
 
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 
 import "./Lightbox.scss";
 
@@ -12,12 +14,10 @@ export interface ILightboxProps {
   onClose: () => void;
 }
 
-const LIGHTBOX_PRELOAD_TIMEOUT: number = 1000;
-
 const Lightbox: React.FC<ILightboxProps> = ({ image, onClose }) => {
   useEffect(() => {
     disableScrolling();
-    setTimeout(() => setLoading(false), LIGHTBOX_PRELOAD_TIMEOUT);
+    setTimeout(() => setLoading(false), PRELOAD_TIMEOUT);
   }, []);
 
   const [loading, setLoading] = useState(true);
@@ -27,7 +27,7 @@ const Lightbox: React.FC<ILightboxProps> = ({ image, onClose }) => {
     enableScrolling();
   };
 
-  const Image = <img src={image.url} alt={image.title} />;
+  const Image = <img className="image" src={image.url} alt={image.title} />;
 
   return (
     <div className="lightbox" onClick={handleClose}>

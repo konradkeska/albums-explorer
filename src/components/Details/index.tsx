@@ -1,15 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 
 import * as selectors from "store/albumDetails/selectors";
 import { IAlbum, IPhoto, IPost, IRootState, IUser } from "store/types";
 
+import NavButton from "components/NavButton";
+
+import Album from "./Album";
 import PhotosGrid from "./PhotosGrid";
 import UserDetails from "./UserDetailsList";
 import UserPostsList from "./UserPostsList";
 
 import eng from "lang/eng";
 
+import "../Pagination/Pagination.scss";
 import "./index.scss";
 
 interface IConnectedProps {
@@ -31,25 +36,21 @@ const Details: React.FC<Props> = ({
   user,
   userPosts,
   onPhotoClick,
-}) => (
-  <>
-    <section className="album">
-      <h5 className="sub-title">{eng.ALBUM_TITLE}</h5>
-      <h1 className="uppercase">{album.title}</h1>
-    </section>
-    <section className="photos">
+}) => {
+  const { goBack } = useHistory();
+  const handleBack = () => goBack();
+  return (
+    <>
+      <Album album={album} />
       <PhotosGrid photos={photos} onPhotoClick={onPhotoClick} />
-    </section>
-    <section className="posts full-width">
-      <h5 className="sub-title">{eng.RECENT_POSTS}</h5>
       <UserPostsList userPosts={userPosts} />
-    </section>
-    <section className="user full-width">
-      <h5 className="sub-title">{eng.ABOUT_AUTHOR}</h5>
       <UserDetails user={user} />
-    </section>
-  </>
-);
+      <nav className="page-nav">
+        <NavButton onClick={handleBack} isActive={true} label={eng.GO_BACK} />
+      </nav>
+    </>
+  );
+};
 
 const mapStateToProps = (state: IRootState): IConnectedProps => ({
   album: selectors.getAlbum(state),

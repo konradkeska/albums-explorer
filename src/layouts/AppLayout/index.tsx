@@ -8,7 +8,7 @@ import "./AppLayout.scss";
 
 const AppLayout: React.FC = ({ children }) => (
   <>
-    <div className="content-wrapper">
+    <div className="wrapper">
       <Search />
       <main className="content">{children}</main>
       <footer className="footer-bar">

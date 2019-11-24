@@ -1,5 +1,7 @@
-import * as React from "react";
+import React from "react";
 import { IPost } from "store/types";
+
+import eng from "lang/eng";
 
 import "./UserPostsList.scss";
 
@@ -19,7 +21,12 @@ const UserPostsList: React.FC<IUserPostsListProps> = ({ userPosts }) => {
       </li>
     ));
 
-  return <ul className="list">{ListItems}</ul>;
+  return (
+    <section className="posts full-width">
+      <h5 className="sub-title">{eng.RECENT_POSTS}</h5>
+      <ul className="list">{ListItems}</ul>
+    </section>
+  );
 };
 
 export default UserPostsList;

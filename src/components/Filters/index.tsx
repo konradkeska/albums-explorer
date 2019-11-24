@@ -1,6 +1,6 @@
 import React from "react";
 
-import Dropdown from "./Dropdown";
+import Dropdown from "../Dropdown";
 
 import "./Filters.scss";
 
