@@ -14,8 +14,8 @@ const AlbumTile: React.FC<IAlbumTileProps> = ({
   album: { title, id },
   user,
 }) => (
-  <Link key={id} className="link tile" to={`/albums/${id}`}>
-    <ul className="list tile__details">
+  <Link key={id} className="link album-tile" to={`/albums/${id}`}>
+    <ul className="list album-tile__details">
       <li className="list-item text-normal full-width">
         <span className="bold uppercase">{title}</span>
       </li>
