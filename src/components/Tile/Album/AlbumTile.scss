@@ -1,6 +1,6 @@
 @import "../../../config/style-base.scss";
 
-.tile {
+.album-tile {
   display: inline-flex;
   width: calc(50% - #{$length-small});
   padding: calc(#{$length-medium * 0.6666}) $length-medium;
@@ -30,7 +30,7 @@
 }
 
 @media (max-width: 768px) {
-  .tile {
+  .album-tile {
     display: inline-flex;
     width: 100%;
     padding: calc(#{$length-medium * 0.6666}) $length-medium;
