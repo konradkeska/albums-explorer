@@ -1,36 +1,30 @@
 @import "../../config/style-base.scss";
+@import "../../config/mixins-base.scss";
 
 .page-nav {
   &__button {
-    width: 33.3333%;
-    padding: calc(#{$length-small} * 0.8) calc(#{$length-medium} / 2);
-    background-color: transparent;
-    border: $border;
-    color: #eee;
-    font-size: $font-medium;
-    box-sizing: border-box;
-    &:hover {
-      border-color: $smog;
-    }
+    @include nav-button;
+
     &--inactive {
-      border-color: #eee !important;
+      border-color: $light-gray !important;
     }
     &--active {
       border: $border-hover;
       background-color: $white;
-      color: gray;
+      color: $gray;
       &:active {
         transform: $transform;
       }
       &:hover {
         cursor: pointer;
-        color: $gray;
+        color: $light-black;
         border: $border-hover;
         box-shadow: $shadow;
       }
     }
   }
 }
+
 @media (max-width: 600px) {
   .page-nav {
     &__button {

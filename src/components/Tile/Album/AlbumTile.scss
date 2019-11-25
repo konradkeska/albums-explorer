@@ -15,8 +15,8 @@
   }
 
   &:hover {
-    border: 1px solid #f0f0f0;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    border: $border-hover;
+    box-shadow: $shadow;
   }
 
   &__details {

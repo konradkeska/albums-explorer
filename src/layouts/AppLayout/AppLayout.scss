@@ -1,7 +1,7 @@
 @import "../../config/style-base.scss";
 
 .link:-webkit-any-link {
-  color: $gray;
+  color: $light-black;
   text-decoration: none;
   &:hover {
     color: $black;
