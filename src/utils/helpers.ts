@@ -1,7 +1,7 @@
 import { History } from "history";
 
-import { QueryField, IAlbum } from "store/types";
 import { AxiosResponse } from "axios";
+import { IAlbum, QueryField } from "store/types";
 
 const debounce = (func: any = alert, timeout = 500) => {
   let timeoutId: any;
