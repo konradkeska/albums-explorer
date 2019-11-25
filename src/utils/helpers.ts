@@ -1,6 +1,7 @@
 import { History } from "history";
 
-import { QueryField } from "store/types";
+import { QueryField, IAlbum } from "store/types";
+import { AxiosResponse } from "axios";
 
 const debounce = (func: any = alert, timeout = 500) => {
   let timeoutId: any;
@@ -16,22 +17,26 @@ const debounce = (func: any = alert, timeout = 500) => {
 const setQueryParam = (field: QueryField, value: string, history: History) => {
   const currentUrlParams = new URLSearchParams(window.location.search);
   currentUrlParams.set(field, value);
-  if (!value && !currentUrlParams.toString()) {
-    history.push(`${window.location.pathname}`);
+  const queryString = currentUrlParams.toString();
+
+  if (queryString) {
+    history.push(`${window.location.pathname}?${queryString}`);
   } else {
-    history.push(`${window.location.pathname}?${currentUrlParams.toString()}`);
+    history.push(`${window.location.pathname}`);
   }
 };
 
 const getLastPageFromLinkRel = (linkHeader: string) => {
   const linkRels: string[] = linkHeader.split(",");
   const lastPageRel = linkRels.find((item) => item.includes('rel="last"'));
+
   if (lastPageRel) {
-    const lastLinkUrl = lastPageRel.slice(
+    const lastPageLink: string = lastPageRel.slice(
       lastPageRel.indexOf("<") + 1,
       lastPageRel.indexOf('>; rel="last"'),
     );
-    return new URLSearchParams(lastLinkUrl).get("_page");
+    const lastPageLinkURL = new URL(lastPageLink);
+    return lastPageLinkURL.searchParams.get("_page");
   }
 };
 
@@ -51,6 +56,30 @@ const scrollToTop = () => {
   window.scrollTo(0, 0);
 };
 
+const receiveDefaultQueryParams = (url: string): void => {
+  const { searchParams } = new URL(url);
+  const [pageParam, limitParam] = [
+    searchParams.get("_page"),
+    searchParams.get("_limit"),
+  ];
+  pageParam && searchParams.set("_page", pageParam);
+  limitParam && searchParams.set("_limit", limitParam);
+
+  const queryString = searchParams.toString();
+
+  if (!window.location.href.includes(queryString)) {
+    window.location.href = `${window.location}?${queryString}`;
+  }
+};
+
+const handleDefaultQueryParams = (res: AxiosResponse<IAlbum[]>) => {
+  const url: string = res && res.request && res.request.responseURL;
+  if (url) {
+    receiveDefaultQueryParams(url);
+  }
+  return res;
+};
+
 export {
   debounce,
   setQueryParam,
@@ -58,4 +87,6 @@ export {
   disableScrolling,
   enableScrolling,
   scrollToTop,
+  receiveDefaultQueryParams,
+  handleDefaultQueryParams,
 };

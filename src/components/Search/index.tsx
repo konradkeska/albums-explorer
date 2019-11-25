@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { useLocation, useHistory } from "react-router";
+import { useLocation } from "react-router";
 
 import { useQueryParam } from "utils/hooks";
 
 import eng from "lang/eng";
 
 import "./Search.scss";
-import { setQueryParam } from "utils/helpers";
 
 const Search: React.FC = () => {
   const { pathname } = useLocation();
