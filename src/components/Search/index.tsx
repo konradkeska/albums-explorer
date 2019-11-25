@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useHistory } from "react-router";
 
 import { useQueryParam } from "utils/hooks";
 
 import eng from "lang/eng";
 
 import "./Search.scss";
+import { setQueryParam } from "utils/helpers";
 
 const Search: React.FC = () => {
   const { pathname } = useLocation();
   const [qParam] = useQueryParam("q");
+  const [limitParam] = useQueryParam("_limit");
   const [query, setQuery] = useState(qParam || "");
 
   if (pathname !== "/") {
@@ -30,6 +32,8 @@ const Search: React.FC = () => {
         placeholder={eng.SEARCH}
         autoFocus={true}
       />
+      <input type="hidden" name="_page" value="1" />
+      <input type="hidden" name="_limit" value={limitParam as string} />
     </form>
   );
 };
