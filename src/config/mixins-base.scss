@@ -1,0 +1,24 @@
+@import "./style-base.scss";
+
+@mixin nav-button {
+  width: 33.3333%;
+  padding: calc(#{$length-small} * 0.8) calc(#{$length-medium} / 2);
+  background-color: transparent;
+  border: $border;
+  color: $light-gray;
+  font-size: $font-medium;
+  box-sizing: border-box;
+}
+
+@mixin nav-button-active {
+  border: $border;
+  background-color: $white;
+  color: $gray;
+}
+
+@mixin nav-button-hover {
+  cursor: pointer;
+  color: $light-black;
+  border: $border-hover;
+  box-shadow: $shadow;
+}

@@ -1,0 +1,42 @@
+@import "../../../config/style-base.scss";
+
+.tile {
+  display: inline-flex;
+  width: calc(50% - #{$length-small});
+  padding: calc(#{$length-medium * 0.6666}) $length-medium;
+  margin-bottom: calc(#{$length-medium * 0.6666});
+  border: $border;
+  box-sizing: border-box;
+  background-color: $white;
+  height: 140px;
+
+  &:nth-child(2n + 1) {
+    margin-right: $length-medium;
+  }
+
+  &:hover {
+    border: $border-hover;
+    box-shadow: $shadow;
+  }
+
+  &__details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 768px) {
+  .tile {
+    display: inline-flex;
+    width: 100%;
+    padding: calc(#{$length-medium * 0.6666}) $length-medium;
+    margin-bottom: calc(#{$length-medium * 0.6666});
+    border: $border;
+    box-sizing: border-box;
+    background-color: #ffffff;
+  }
+}

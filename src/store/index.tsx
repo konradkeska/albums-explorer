@@ -26,9 +26,7 @@ const rootReducer: Reducer<IRootState, AnyAction> = combineReducers<IRootState>(
     albums,
   },
 );
-
 const enhancer = composeEnhancers(applyMiddleware(thunk));
-
 const store: Store<IRootState> = createStore(rootReducer, enhancer);
 
 export default store;

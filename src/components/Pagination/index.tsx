@@ -1,9 +1,10 @@
 import React from "react";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
 
-import { setQueryParam } from "utils/helpers";
+import { scrollToTop, setQueryParam } from "utils/helpers";
+import { useQueryParam } from "utils/hooks";
 
-import PageNavButton from "./PaginationButton";
+import NavButton from "../NavButton";
 
 import eng from "lang/eng";
 
@@ -11,43 +12,38 @@ import "./Pagination.scss";
 
 interface IProps {
   lastPage?: number;
-  setLoading: (value: React.SetStateAction<boolean>) => void;
+  setLoading?: (value: React.SetStateAction<boolean>) => void;
 }
 
 const Pagination: React.FC<IProps> = ({ setLoading, lastPage }) => {
   const history = useHistory();
-  const location = useLocation();
 
-  const currentUrlParams = new URLSearchParams(location.search);
-  const pageParam = currentUrlParams.get("_page");
+  const [pageParam] = useQueryParam("_page");
   const currentPage = pageParam ? Number(pageParam) : 1;
 
-  const goToNextPage = () => {
-    setLoading(true);
-    setQueryParam("_page", (currentPage + 1).toString(), history);
-  };
-
-  const goToPrevPage = () => {
-    setLoading(true);
-    setQueryParam("_page", (currentPage - 1).toString(), history);
+  const handlePageChange = (direction: "next" | "prev") => () => {
+    const nextPage = direction === "next" ? currentPage + 1 : currentPage - 1;
+    setLoading && setLoading(true);
+    setQueryParam("_page", nextPage.toString(), history);
+    scrollToTop();
   };
 
   return (
     <nav className="page-nav">
-      <PageNavButton
+      <NavButton
         label={eng.PREV}
         isActive={currentPage !== 1}
         disabled={currentPage === 1}
-        onClick={goToPrevPage}
+        onClick={handlePageChange("prev")}
       />
-      <p className="text-normal gray">
+      <p className="page-nav__label text-normal">
         {eng.PAGE} <span className="bold">{currentPage}</span>
       </p>
-      <PageNavButton
+      <NavButton
         label={eng.NEXT}
         isActive={currentPage !== lastPage}
         disabled={currentPage === lastPage}
-        onClick={goToNextPage}
+        onClick={handlePageChange("next")}
       />
     </nav>
   );

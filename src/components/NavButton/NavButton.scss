@@ -2,12 +2,6 @@
 @import "../../config/mixins-base.scss";
 
 .page-nav {
-  width: 100%;
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: $length-medium;
-
   &__button {
     @include nav-button;
 
@@ -15,12 +9,17 @@
       border-color: $light-gray !important;
     }
     &--active {
-      @include nav-button-active;
+      border: $border-hover;
+      background-color: $white;
+      color: $gray;
       &:active {
         transform: $transform;
       }
       &:hover {
-        @include nav-button-hover;
+        cursor: pointer;
+        color: $light-black;
+        border: $border-hover;
+        box-shadow: $shadow;
       }
     }
   }
@@ -28,14 +27,9 @@
 
 @media (max-width: 600px) {
   .page-nav {
-    display: flex;
-    flex-direction: column;
     &__button {
       margin-top: $length-small;
       width: 100%;
-    }
-    &__label {
-      margin-top: $length-medium;
     }
   }
 }

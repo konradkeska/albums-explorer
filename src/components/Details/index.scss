@@ -1,0 +1,13 @@
+@import "../../config/style-base.scss";
+
+.album,
+.user,
+.posts {
+  width: 100%;
+}
+
+.sub-title {
+  text-transform: uppercase;
+  letter-spacing: $length-tiny;
+  font-weight: normal;
+}

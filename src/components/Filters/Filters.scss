@@ -1,0 +1,19 @@
+@import "../../config/style-base.scss";
+
+.filter {
+  display: flex;
+  align-items: center;
+
+  &__label {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    color: $gray;
+  }
+}
+
+.filters {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: center;
+}

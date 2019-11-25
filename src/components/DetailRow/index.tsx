@@ -1,14 +1,16 @@
-import * as React from "react";
+import React from "react";
+
+import "./DetailRow.scss";
 
 interface IDetailRowProps {
-  value?: string;
   label: string;
+  value?: string;
 }
 
 const DetailRow: React.FC<IDetailRowProps> = ({ label, value }) => (
   <li className="list__item">
-    <label className="bold">{label} </label>
-    <p style={{ marginTop: "3px" }}>{value || "-"}</p>
+    <label className="bold">{label}</label>
+    <p className="value">{value || "-"}</p>
   </li>
 );
 

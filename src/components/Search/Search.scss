@@ -1,0 +1,49 @@
+@import "../../config/style-base.scss";
+
+.search-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  box-shadow: $shadow;
+  background-color: #fff;
+
+  &__input {
+    padding: calc(#{$length-medium * 0.5}) calc(#{$length-small * 0.8});
+    border: $border;
+    margin: calc(#{$length-medium * 0.6666});
+    background-color: #ffffff;
+    width: 33.3333%;
+    text-align: center;
+    border-radius: $length-medium;
+    font: 400 14px $font-main;
+
+    &:hover,
+    &:focus {
+      border: $border-hover;
+      box-shadow: $shadow;
+    }
+    &[disabled],
+    &[disabled]:hover,
+    &[disabled]:focus {
+      border: none !important;
+      color: #eee !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .search-form {
+    &__input {
+      width: 50%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .search-form {
+    &__input {
+      width: 66.6666%;
+    }
+  }
+}

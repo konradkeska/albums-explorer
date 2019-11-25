@@ -2,8 +2,8 @@ import { IAlbum, IUser } from "store/types";
 import {
   AlbumsActionType,
   IReceiveAlbumsAction,
-  IReceiveUsersAction,
   IReceiveLastPageAction,
+  IReceiveUsersAction,
 } from "./types";
 
 const receiveAlbums = (albums: IAlbum[]): IReceiveAlbumsAction => ({

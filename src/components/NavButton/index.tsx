@@ -1,13 +1,13 @@
-import * as React from "react";
+import React from "react";
 
-interface IPageNavButtonProps {
+interface INavButtonProps {
   label: string;
   isActive: boolean;
   disabled?: boolean;
   onClick?: () => void;
 }
 
-const PageNavButton: React.FC<IPageNavButtonProps> = ({
+const NavButton: React.FC<INavButtonProps> = ({
   label,
   isActive,
   disabled,
@@ -25,4 +25,4 @@ const PageNavButton: React.FC<IPageNavButtonProps> = ({
   );
 };
 
-export default PageNavButton;
+export default NavButton;
