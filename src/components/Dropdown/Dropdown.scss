@@ -1,0 +1,8 @@
+@import "../../config/style-base.scss";
+
+.filter__dropdown {
+  margin: 0 calc(#{$length-medium} * 0.6666);
+  font-size: $font-medium;
+  border: none;
+  background-color: transparent;
+}

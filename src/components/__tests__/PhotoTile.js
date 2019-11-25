@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Photo from "../Photo";
+import Photo from "../Tile/Photo";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");

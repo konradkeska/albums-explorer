@@ -1,0 +1,94 @@
+@import "../../config/style-base.scss";
+
+.link:-webkit-any-link {
+  color: $light-black;
+  text-decoration: none;
+  &:hover {
+    color: $black;
+    cursor: pointer;
+  }
+  &:active {
+    transform: $transform;
+  }
+}
+
+:focus {
+  outline: none;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-normal {
+  font-size: $font-medium;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.wrapper {
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: $length-medium;
+  background-color: $snow;
+  border-top: $border;
+  border-bottom: $border;
+  box-shadow: $shadow;
+}
+
+.footer-bar {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 0 $length-medium;
+  background-color: $white;
+  color: #cccccc;
+  box-shadow: $shadow;
+
+  .copyright {
+    text-align: left;
+  }
+  .app-name {
+    text-align: right;
+  }
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  &__item {
+    width: 50%;
+  }
+}

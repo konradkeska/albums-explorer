@@ -1,5 +1,7 @@
-import * as React from "react";
+import React from "react";
 import { IPost } from "store/types";
+
+import eng from "lang/eng";
 
 import "./UserPostsList.scss";
 
@@ -10,16 +12,21 @@ interface IUserPostsListProps {
 const UserPostsList: React.FC<IUserPostsListProps> = ({ userPosts }) => {
   const ListItems =
     userPosts &&
-    userPosts.map((item) => (
-      <li className="list__item" key={item.id}>
+    userPosts.map(({ id, title, body }) => (
+      <li className="list__item" key={id}>
         <article>
-          <h3>{item.title}</h3>
-          <p>{item.body}</p>
+          <h3>{title}</h3>
+          <p>{body}</p>
         </article>
       </li>
     ));
 
-  return <ul className="list">{ListItems}</ul>;
+  return (
+    <section className="posts full-width">
+      <h5 className="sub-title">{eng.RECENT_POSTS}</h5>
+      <ul className="list">{ListItems}</ul>
+    </section>
+  );
 };
 
 export default UserPostsList;
