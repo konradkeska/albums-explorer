@@ -14,30 +14,35 @@ const debounce = (func: any = alert, timeout = 500) => {
   };
 };
 
+const appendQueryParams = (queryString: string, history: History) =>
+  queryString
+    ? history.push(`${window.location.pathname}?${queryString}`)
+    : history.push(`${window.location.pathname}`);
+
 const setQueryParam = (field: QueryField, value: string, history: History) => {
   const currentUrlParams = new URLSearchParams(window.location.search);
   currentUrlParams.set(field, value);
   const queryString = currentUrlParams.toString();
-
-  if (queryString) {
-    history.push(`${window.location.pathname}?${queryString}`);
-  } else {
-    history.push(`${window.location.pathname}`);
-  }
+  appendQueryParams(queryString, history);
 };
 
-const getLastPageFromLinkRel = (linkHeader: string) => {
-  const linkRels: string[] = linkHeader.split(",");
-  const lastPageRel = linkRels.find((item) => item.includes('rel="last"'));
+const getRel = (linkHeader: string, relName: string) =>
+  linkHeader.split(",").find((rel) => rel.includes(`rel="${relName}"`));
 
-  if (lastPageRel) {
-    const lastPageLink: string = lastPageRel.slice(
-      lastPageRel.indexOf("<") + 1,
-      lastPageRel.indexOf('>; rel="last"'),
-    );
-    const lastPageLinkURL = new URL(lastPageLink);
-    return lastPageLinkURL.searchParams.get("_page");
-  }
+const getRelUrl = (rel: string, relName: string) =>
+  rel.slice(rel.indexOf("<") + 1, rel.indexOf(`>; rel="${relName}"`));
+
+const getUrlParamValue = (url: string, param: string) =>
+  new URL(url).searchParams.get(param);
+
+const getRelParamValue = (rel: string, relName: string, param: string) => {
+  const requestUrl: string = getRelUrl(rel, relName);
+  return getUrlParamValue(requestUrl, param);
+};
+
+const getLastPage = (linkHeader: string) => {
+  const lastPageRel = getRel(linkHeader, "last");
+  return lastPageRel ? getRelParamValue(lastPageRel, "last", "_page") : "1";
 };
 
 const disableScrolling = () => {
@@ -58,32 +63,33 @@ const scrollToTop = () => {
 
 const receiveDefaultQueryParams = (url: string): void => {
   const { searchParams } = new URL(url);
+
   const [pageParam, limitParam] = [
     searchParams.get("_page"),
     searchParams.get("_limit"),
   ];
+
   pageParam && searchParams.set("_page", pageParam);
   limitParam && searchParams.set("_limit", limitParam);
 
   const queryString = searchParams.toString();
+  const hasQueryString = window.location.href.includes(queryString);
 
-  if (!window.location.href.includes(queryString)) {
+  if (!hasQueryString) {
     window.location.href = `${window.location}?${queryString}`;
   }
 };
 
 const handleDefaultQueryParams = (res: AxiosResponse<IAlbum[]>) => {
-  const url: string = res && res.request && res.request.responseURL;
-  if (url) {
-    receiveDefaultQueryParams(url);
-  }
+  const url: string = (res && res.request && res.request.responseURL) || "";
+  url && receiveDefaultQueryParams(url);
   return res;
 };
 
 export {
   debounce,
   setQueryParam,
-  getLastPageFromLinkRel,
+  getLastPage,
   disableScrolling,
   enableScrolling,
   scrollToTop,
