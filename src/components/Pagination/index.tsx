@@ -12,7 +12,7 @@ import "./Pagination.scss";
 
 interface IProps {
   lastPage?: number;
-  setLoading?: (value: React.SetStateAction<boolean>) => void;
+  setLoading: (value: React.SetStateAction<boolean>) => void;
 }
 
 const Pagination: React.FC<IProps> = ({ setLoading, lastPage }) => {
@@ -21,12 +21,20 @@ const Pagination: React.FC<IProps> = ({ setLoading, lastPage }) => {
   const [pageParam] = useQueryParam("_page");
   const currentPage = pageParam ? Number(pageParam) : 1;
 
+  const getNextPage = (direction: "next" | "prev") =>
+    (direction === "next" ? currentPage + 1 : currentPage - 1).toString();
+
   const handlePageChange = (direction: "next" | "prev") => () => {
-    const nextPage = direction === "next" ? currentPage + 1 : currentPage - 1;
-    setLoading && setLoading(true);
-    setQueryParam("_page", nextPage.toString(), history);
+    setLoading(true);
+    setQueryParam("_page", getNextPage(direction), history);
     scrollToTop();
   };
+
+  const CurrentPageLabel = lastPage && lastPage > 1 && (
+    <p className="page-nav__label text-normal">
+      {eng.PAGE} <span className="bold">{currentPage}</span>
+    </p>
+  );
 
   return (
     <nav className="page-nav">
@@ -36,9 +44,7 @@ const Pagination: React.FC<IProps> = ({ setLoading, lastPage }) => {
         disabled={currentPage === 1}
         onClick={handlePageChange("prev")}
       />
-      <p className="page-nav__label text-normal">
-        {eng.PAGE} <span className="bold">{currentPage}</span>
-      </p>
+      {CurrentPageLabel}
       <NavButton
         label={eng.NEXT}
         isActive={currentPage !== lastPage}
