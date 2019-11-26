@@ -6,15 +6,12 @@ import * as api from "./api";
 import { ApiAction, IAlbum } from "store/types";
 import { LoadAlbumsActions } from "./types";
 
-import {
-  getLastPageFromLinkRel,
-  handleDefaultQueryParams,
-} from "utils/helpers";
+import { getLastPage, handleDefaultQueryParams } from "utils/helpers";
 
 const loadAlbums = (): ApiAction<LoadAlbumsActions> => async (dispatch) => {
   const receiveLastPage = (res: AxiosResponse<IAlbum[]>) => {
     const linkHeader: string = (res && res.headers && res.headers.link) || "";
-    const lastPage = getLastPageFromLinkRel(linkHeader);
+    const lastPage = getLastPage(linkHeader);
     lastPage && dispatch(actions.receiveLastPage(Number(lastPage)));
     return res;
   };
