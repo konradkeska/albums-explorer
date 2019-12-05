@@ -9,7 +9,7 @@ import Spinner from "../Spinner";
 
 import "./Lightbox.scss";
 
-export interface ILightboxProps {
+interface ILightboxProps {
   image: IPhoto;
   onClose: () => void;
 }

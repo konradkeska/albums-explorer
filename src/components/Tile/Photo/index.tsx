@@ -4,12 +4,12 @@ import { IPhoto } from "store/types";
 
 import "./PhotoTile.scss";
 
-export interface IPhotoProps {
+interface IPhotoTileProps {
   photo: IPhoto;
   onClick: (image: IPhoto) => () => void;
 }
 
-const PhotoTile: React.FC<IPhotoProps> = ({ photo, onClick }) => (
+const PhotoTile: React.FC<IPhotoTileProps> = ({ photo, onClick }) => (
   <figure className="photo-tile" key={photo.id}>
     <img
       className="image"

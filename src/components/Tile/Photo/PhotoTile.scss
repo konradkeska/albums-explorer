@@ -5,7 +5,7 @@
   margin: 0;
   &__title {
     padding: calc(#{$length-small * 0.6666}) $length-small;
-    background-color: #fafafa;
+    background-color: $snow;
     max-width: 50%;
     top: 0;
     left: 0;
