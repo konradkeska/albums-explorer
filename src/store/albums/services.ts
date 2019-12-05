@@ -10,6 +10,7 @@ import { PRELOAD_TIMEOUT } from "config/constants";
 import { getLastPage, handleDefaultQueryParams } from "utils/helpers";
 
 const loadAlbums = (
+  query: string,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
 ): ApiAction<LoadAlbumsActions> => async (dispatch) => {
   const receiveLastPage = (res: AxiosResponse<IAlbum[]>) => {
@@ -21,7 +22,7 @@ const loadAlbums = (
 
   const [{ data: albumsData }, { data: usersData }] = await Promise.all([
     api
-      .loadAlbums()
+      .loadAlbums(query)
       .then(handleDefaultQueryParams)
       .then(receiveLastPage),
     api.loadUsers(),
