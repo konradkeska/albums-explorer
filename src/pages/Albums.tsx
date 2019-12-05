@@ -12,14 +12,17 @@ import Pagination from "components/Pagination";
 import Results from "components/Results";
 import Spinner from "components/Spinner";
 
-import { PRELOAD_TIMEOUT } from "config/constants";
+import { DEFAULT_LIST_QUERY } from "config/constants";
 import { setQueryParam } from "utils/helpers";
 import { useQueryParam } from "utils/hooks";
 
 import eng from "lang/eng";
 
 interface IActionsProps {
-  loadAlbums: () => void;
+  loadAlbums: (
+    queryString: string,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  ) => void;
 }
 
 interface IConnectedProps {
@@ -30,16 +33,15 @@ interface IConnectedProps {
 type Props = IActionsProps & IConnectedProps;
 
 const Albums: React.FC<Props> = ({ albums, loadAlbums, lastPage }) => {
-  const history = useHistory();
   const [loading, setLoading] = useState<boolean>(true);
+  const history = useHistory();
 
   const [limitParam, currentUrlParams] = useQueryParam("_limit");
-  const queryString = currentUrlParams.toString();
+  const query = currentUrlParams.toString() || DEFAULT_LIST_QUERY;
 
   useEffect(() => {
-    loadAlbums();
-    setTimeout(() => setLoading(false), PRELOAD_TIMEOUT);
-  }, [loadAlbums, queryString]);
+    loadAlbums(query, setLoading);
+  }, [loadAlbums, query]);
 
   const FILTER_ITEMS = [
     {

@@ -6,9 +6,13 @@ import * as api from "./api";
 import { ApiAction, IAlbum } from "store/types";
 import { LoadAlbumsActions } from "./types";
 
+import { PRELOAD_TIMEOUT } from "config/constants";
 import { getLastPage, handleDefaultQueryParams } from "utils/helpers";
 
-const loadAlbums = (): ApiAction<LoadAlbumsActions> => async (dispatch) => {
+const loadAlbums = (
+  query: string,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+): ApiAction<LoadAlbumsActions> => async (dispatch) => {
   const receiveLastPage = (res: AxiosResponse<IAlbum[]>) => {
     const linkHeader: string = (res && res.headers && res.headers.link) || "";
     const lastPage = getLastPage(linkHeader);
@@ -18,13 +22,15 @@ const loadAlbums = (): ApiAction<LoadAlbumsActions> => async (dispatch) => {
 
   const [{ data: albumsData }, { data: usersData }] = await Promise.all([
     api
-      .loadAlbums()
+      .loadAlbums(query)
       .then(handleDefaultQueryParams)
       .then(receiveLastPage),
     api.loadUsers(),
   ]);
   dispatch(actions.receiveAlbums(albumsData));
   dispatch(actions.receiveUsers(usersData));
+
+  setTimeout(() => setLoading(false), PRELOAD_TIMEOUT);
 };
 
 export { loadAlbums };
