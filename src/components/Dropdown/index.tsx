@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Dropdown.scss";
 
-export interface IDropdownProps {
+interface IDropdownProps {
   items: any[];
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   defaultValue?: string | number | string[];

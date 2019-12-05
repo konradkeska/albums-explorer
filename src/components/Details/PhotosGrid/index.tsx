@@ -5,12 +5,12 @@ import PhotoTile from "components/Tile/Photo";
 
 import "./PhotosGrid.scss";
 
-interface IPhotosProps {
+interface IPhotosGridProps {
   photos: IPhoto[];
   onPhotoClick: (image: IPhoto) => () => void;
 }
 
-const PhotosGrid: React.FC<IPhotosProps> = ({ photos, onPhotoClick }) => {
+const PhotosGrid: React.FC<IPhotosGridProps> = ({ photos, onPhotoClick }) => {
   const Photos =
     photos &&
     photos.map((photo) => (

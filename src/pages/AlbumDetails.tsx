@@ -5,32 +5,32 @@ import { useParams } from "react-router";
 import * as services from "store/albumDetails/services";
 import { IPhoto } from "store/types";
 
-import { PRELOAD_TIMEOUT } from "config/constants";
-
 import Details from "components/Details";
 import Lightbox from "components/Lightbox";
 import Spinner from "components/Spinner";
 
 interface IActionsProps {
-  loadDetails: (albumId: number) => void;
+  loadDetails: (
+    albumId: number,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  ) => void;
 }
 
 const AlbumDetails: React.FC<IActionsProps> = ({ loadDetails }) => {
+  const [loading, setLoading] = useState<boolean>(true);
   const { id } = useParams();
 
   useEffect(() => {
-    loadDetails(Number(id));
-    setTimeout(() => setLoading(false), PRELOAD_TIMEOUT);
+    loadDetails(Number(id), setLoading);
   }, [loadDetails, id]);
 
-  const [loading, setLoading] = useState<boolean>(true);
   const [lightboxImage, setLightboxImage] = useState<IPhoto | null>(null);
 
   const openLightbox = (image: IPhoto) => () => setLightboxImage(image);
   const closeLightbox = () => setLightboxImage(null);
 
   const LightboxComponent = lightboxImage && (
-    <Lightbox image={lightboxImage && lightboxImage} onClose={closeLightbox} />
+    <Lightbox image={lightboxImage} onClose={closeLightbox} />
   );
 
   return (
