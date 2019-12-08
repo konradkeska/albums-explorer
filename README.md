@@ -1,4 +1,4 @@
-# **album-app**
+# **albums-explorer**
 
 ## Initial setup
 
