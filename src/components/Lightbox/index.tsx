@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { IPhoto } from "store/types";
 
 import { PRELOAD_TIMEOUT } from "config/constants";
-import { disableScrolling, enableScrolling } from "utils/helpers";
+import { disableScrolling, enableScrolling } from "./helpers";
 
 import Spinner from "../Spinner";
 

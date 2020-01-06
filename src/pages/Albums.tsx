@@ -56,7 +56,7 @@ const Albums: React.FC<Props> = ({ albums, loadAlbums, lastPage }) => {
     } as IFilter<number>,
   ];
 
-  const hasResults = albums && albums.length > 0;
+  const hasResults = albums?.length > 0;
 
   return loading ? (
     <Spinner />
