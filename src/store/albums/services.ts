@@ -14,7 +14,7 @@ const loadAlbums = (
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
 ): ApiAction<LoadAlbumsActions> => async (dispatch) => {
   const receiveLastPage = (res: AxiosResponse<IAlbum[]>) => {
-    const linkHeader: string = (res && res.headers && res.headers.link) || "";
+    const linkHeader: string = res?.headers?.link || "";
     const lastPage = getLastPage(linkHeader);
     lastPage && dispatch(actions.receiveLastPage(Number(lastPage)));
     return res;

@@ -11,11 +11,9 @@ interface IPhotosGridProps {
 }
 
 const PhotosGrid: React.FC<IPhotosGridProps> = ({ photos, onPhotoClick }) => {
-  const Photos =
-    photos &&
-    photos.map((photo) => (
-      <PhotoTile onClick={onPhotoClick} key={photo.id} photo={photo} />
-    ));
+  const Photos = photos?.map((photo) => (
+    <PhotoTile onClick={onPhotoClick} key={photo.id} photo={photo} />
+  ));
 
   return <section className="photos">{Photos}</section>;
 };

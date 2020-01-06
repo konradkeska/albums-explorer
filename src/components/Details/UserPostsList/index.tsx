@@ -10,16 +10,14 @@ interface IUserPostsListProps {
 }
 
 const UserPostsList: React.FC<IUserPostsListProps> = ({ userPosts }) => {
-  const ListItems =
-    userPosts &&
-    userPosts.map(({ id, title, body }) => (
-      <li className="list__item" key={id}>
-        <article>
-          <h3>{title}</h3>
-          <p>{body}</p>
-        </article>
-      </li>
-    ));
+  const ListItems = userPosts?.map(({ id, title, body }) => (
+    <li className="list__item" key={id}>
+      <article>
+        <h3>{title}</h3>
+        <p>{body}</p>
+      </article>
+    </li>
+  ));
 
   return (
     <section className="posts full-width">
